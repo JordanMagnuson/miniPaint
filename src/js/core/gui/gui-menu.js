@@ -6,10 +6,22 @@
 import config from './../../config.js';
 import menuDefinition from './../../config-menu.js';
 import Help_translate_class from './../../modules/help/translate.js';
+import Layer_new_class from './../../modules/layer/new.js';
 
 /**
  * class responsible for rendering main menu
  */
+
+// function popup_function(){
+// 	var blur = document.getElementsById("bg_blur");
+// 	blur.style.display = "none";
+// 	welcome_screen.style.display = "none";
+// _this.New_project.new();
+
+// }
+// on_popup_menu(){
+// 	document.getElementById("blank_project").addEventListener("click", popup_function());
+// }
 class GUI_menu_class {
 
 	constructor() {
@@ -19,6 +31,7 @@ class GUI_menu_class {
 		this.menuBarNode = null;
 		this.lastFocusedMenuBarLink = 0;
 		this.dropdownStack = [];
+		// this.New_project = new Layer_new_class(); 
 
 		this.Help_translate = new Help_translate_class();
 	}

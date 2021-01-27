@@ -1,5 +1,5 @@
 
-.welcome_screen{
+#welcome_screen{
 	position: absolute;
 	text-align: center;
 	font-size: 110%;
@@ -61,7 +61,7 @@ h4 {
 	padding-bottom: 40px;
 	margin: 0;
 }
-.bg_blur{ 
+#bg_blur{ 
 	margin:0;
 	padding:0;
 	height:100%;
