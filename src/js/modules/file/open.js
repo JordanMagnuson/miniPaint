@@ -296,7 +296,7 @@ class File_open_class {
 
 			if (f.name.match('.psd')) {
 				PSD.fromEvent(e).then(function (psd) {
-					_this.load_psd(psd);
+					_this.new_load_psd(psd);
 				});
 				return;
 			}
@@ -422,6 +422,7 @@ class File_open_class {
 
 		var children = psd.tree().children();
 		var doc = psd.tree().export().document;
+		var max_id_order = 0;
 
 		config.ZOOM = 1;
 		config.WIDTH = doc.width;
@@ -443,6 +444,8 @@ class File_open_class {
 			value.y = child.layer.top;
 			value.data = png.src;
 			value.opacity = (opacity * 100 / 255.0);
+			value.order = children.length - node;
+			console.log(value)
 
 			app.State.do_action(
 				new app.Actions.Bundle_action('open_image', 'Open Image', [
@@ -452,10 +455,71 @@ class File_open_class {
 
 		}
 
-
+		this.Base_layers.auto_increment = children.length + 1;
 
 
 	}
+
+
+
+	async new_load_psd(psd) {
+		var children = psd.tree().children();
+		var doc = psd.tree().export().document;
+
+		const actions = [];
+
+		//set attributes
+		actions.push(
+			new app.Actions.Prepare_canvas_action('undo'),
+			new app.Actions.Update_config_action({
+				ZOOM: 1,
+				WIDTH: doc.width,
+				HEIGHT: doc.height
+			}),
+			new app.Actions.Reset_layers_action(),
+			new app.Actions.Prepare_canvas_action('do'),
+		);
+
+		var max_id_order = 0;
+		for (var node = children.length - 1; node >= 0; node--) {
+
+			var child = children[node];
+			var value = {};
+			var png = child.layer.image.toPng();
+			var opacity = child.layer.opacity;
+			value.type = 'image';
+			value.name = child.name;
+			value.id = node;
+			value.height = child.layer.height;
+			value.width = child.layer.width;
+			value.x = child.layer.left;
+			value.y = child.layer.top;
+			value.data = png.src;
+			value.opacity = (opacity * 100 / 255.0);
+			value.order = children.length - node;
+			console.log(value)
+
+
+			if(value.id > max_id_order)
+				max_id_order = value.id;
+			if(typeof value.order != undefined && value.order > max_id_order)
+				max_id_order = value.order;
+
+			actions.push(
+				new app.Actions.Insert_layer_action(value, false)
+			);
+
+
+		}
+
+		actions.push(
+			new app.Actions.Set_object_property_action(this.Base_layers, 'auto_increment', max_id_order + 1)
+		);
+		await app.State.do_action(
+			new app.Actions.Bundle_action('open_json_file', 'Open JSON File', actions)
+		);
+	}
+
 
 
 	async load_json(data) {
