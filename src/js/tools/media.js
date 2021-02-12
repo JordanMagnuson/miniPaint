@@ -39,10 +39,11 @@ class Media_class extends Base_tools_class {
 		var key = config.pixabay_key;
 		key = key.split("").reverse().join("");
 
-		if (data.length > 0) {
+		if (data) {
 			for (var i in data) {
 				html += '<div class="item">';
-				html += '	<img class="displayBlock pointer" alt="" src="' + data[i].previewURL + '" data-url="' + data[i].webformatURL + '" />';
+//				html += '	<img class="displayBlock pointer" alt="" src="' + data[i].previewURL + '" data-url="' + data[i].webformatURL + '" />';
+				html += '	<img class="displayBlock pointer" alt="" src="' + data[i].fields.ss_image_thumbnail_url + '" data-url="' + data[i].fields.ss_image_url + '" />';
 				html += '</div>';
 			}
 			//fix for last line
@@ -50,6 +51,7 @@ class Media_class extends Base_tools_class {
 			html += '<div class="item"></div>';
 			html += '<div class="item"></div>';
 			html += '<div class="item"></div>';
+
 		}
 
 		var settings = {
@@ -95,14 +97,18 @@ class Media_class extends Base_tools_class {
 				}
 				else {
 					//query to service
-					var URL = "https://pixabay.com/api/?key=" + key + "&per_page=50&q=" + encodeURIComponent(params.query);
+//					var URL = "https://pixabay.com/api/?key=" + key + "&per_page=50&q=" + encodeURIComponent(params.query);
+					var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
+					URL += "?key=" + params.query ;
+//					console.log(URL);
 					$.getJSON(URL, function (data) {
 						_this.cache[params.query] = data;
-
-						if (parseInt(data.totalHits) == 0) {
+	//						console.log(data);
+						if (parseInt(data.total) == 0) {
 							alertify.error('Your search did not match any images.');
 						}
-						_this.search(params.query, data.hits);
+						delete data.total;
+						_this.search(params.query, data);
 					})
 					.fail(function () {
 						alertify.error('Error connecting to service.');
