@@ -1,3 +1,4 @@
+import app from './../../app.js';
 import config from './../../config.js';
 import Dialog_class from './../../libs/popup.js';
 
@@ -56,12 +57,21 @@ class Layer_composition_class {
 				config.need_render = true;
 			},
 			on_finish: function (params) {
+				console.log(params)
 				config.layer.composition = initial_composition;
-				window.State.save();
 				if (params.composition == '-- Default --') {
 					params.composition = 'source-over';
 				}
-				config.layer.composition = params.composition;
+				app.State.do_action(
+					new app.Actions.Bundle_action('change_composition', 'Change Composition', [
+						new app.Actions.Update_layer_action(config.layer.id, {
+							composition: params.composition
+						})
+					])
+				);
+			},
+			on_cancel: function (params) {
+				config.layer.composition = initial_composition;
 				config.need_render = true;
 			},
 		};

@@ -1,3 +1,4 @@
+import app from './../../app.js';
 import config from './../../config.js';
 import Base_layers_class from './../../core/base-layers.js';
 import Dialog_class from './../../libs/popup.js';
@@ -16,7 +17,7 @@ class Tools_colorToAlpha_class {
 		var _this = this;
 
 		if (config.layer.type != 'image') {
-			alertify.error('Layer must be image, convert it to raster to apply this tool.');
+			alertify.error('This layer must contain an image. Please convert it to raster to apply this tool.');
 			return;
 		}
 
@@ -32,7 +33,6 @@ class Tools_colorToAlpha_class {
 				{name: "color", title: "Color:", value: config.COLOR, type: 'color'},
 			],
 			on_finish: function (params) {
-				window.State.save();
 				_this.apply_affect(params.color);
 			},
 		};
@@ -50,7 +50,9 @@ class Tools_colorToAlpha_class {
 		ctx.putImageData(data, 0, 0);
 
 		//save
-		this.Base_layers.update_layer_image(canvas);
+		return app.State.do_action(
+			new app.Actions.Update_layer_image_action(canvas)
+		);
 	}
 
 	change(data, color) {
