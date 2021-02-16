@@ -31,6 +31,7 @@ class GUI_layers_class {
 		this.Helper = new Helper_class();
 		this.Layer_rename = new Layer_rename_class();
 		this.Duplicate_layer = new Layer_duplicate_class();
+		
 	}
 
 	render_main_layers() {
@@ -55,6 +56,7 @@ class GUI_layers_class {
 				//duplicate current layer
 			//	window.State.save(); 
 				_this.Duplicate_layer.duplicate();
+				
 			}
 			else if (target.id == 'layer_up') {
 				//move layer up

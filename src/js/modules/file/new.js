@@ -82,6 +82,7 @@ class File_new_class {
 
 		if (resolution != 'Custom') {
 			var dim = resolution.split(" ");
+			
 			dim = dim[0].split("x");
 			width = dim[0];
 			height = dim[1];

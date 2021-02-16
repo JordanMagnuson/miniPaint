@@ -83,7 +83,7 @@ class File_open_class {
 	open_file() {
 		var _this = this;
 
-		alertify.success('You can also drag and drop items into browser.');
+//		alertify.success('You can also drag and drop items into browser.');
 
 		document.getElementById("tmp").innerHTML = '';
 		var a = document.createElement('input');

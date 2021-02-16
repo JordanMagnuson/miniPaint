@@ -6,10 +6,14 @@
 import config from './../../config.js';
 import menuDefinition from './../../config-menu.js';
 import Help_translate_class from './../../modules/help/translate.js';
+import Layer_new_class from './../../modules/layer/new.js';
+import File_open_class from './../../modules/file/open.js';
 
 /**
  * class responsible for rendering main menu
  */
+
+
 class GUI_menu_class {
 
 	constructor() {
@@ -19,11 +23,43 @@ class GUI_menu_class {
 		this.menuBarNode = null;
 		this.lastFocusedMenuBarLink = 0;
 		this.dropdownStack = [];
-
+		this.FOC = new File_open_class();
 		this.Help_translate = new Help_translate_class();
 	}
 
+
+
 	render_main() {
+
+		var _this = this;
+		document.getElementById("blank_project").addEventListener("click", function() {
+			console.log("time to start a blank project");
+			var blur = document.getElementById("bg_blur");
+			var welcome_screen = document.getElementById("welcome_screen");
+			blur.remove();
+			welcome_screen.remove();
+		});
+
+		document.getElementById("template").addEventListener("click", function() {
+			console.log("time to start a template");
+			var blur = document.getElementById("bg_blur");
+			var welcome_screen = document.getElementById("welcome_screen");
+			_this.FOC.open_file();
+			blur.remove();
+			welcome_screen.remove();
+		});
+
+		document.getElementById("quick_page").addEventListener("click", function() {
+			console.log("time to start a quick page");
+				var blur = document.getElementById("bg_blur");
+				var welcome_screen = document.getElementById("welcome_screen");
+				_this.FOC.open_file();
+				blur.remove();
+				welcome_screen.remove();
+
+		});
+
+
 		this.menuContainer = document.getElementById('main_menu');
 
 		let menuTemplate = '<ul class="menu_bar" role="menubar" tabindex="0">';
@@ -248,7 +284,7 @@ class GUI_menu_class {
 
 		// Any link in the menu is clicked.
 		if (target && target.tagName === 'A') {
-			const hasPopup = target.getAttribute('aria-haspopup') === 'true';			
+			const hasPopup = target.getAttribute('aria-haspopup') === 'true';
 			if (hasPopup) {
 				this.toggle_dropdown(target, event.isTrusted);
 			} else {

@@ -1,3 +1,83 @@
+
+#welcome_screen{
+	position: absolute;
+	text-align: center;
+	font-size: 110%;
+    color: black;
+    background-color: white;
+    right: 35%;
+    bottom: 18%;
+    height: 500px;
+    width: 800px;
+    border: 5px;
+    outline-style: solid;
+	outline-width: thin;
+	z-index: 13;
+}
+.ws_buttons{
+	position: relative;
+	padding-top: 40px;
+	padding-bottom: 10px;
+}
+#blank_project{
+	padding: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #ccc;
+	width: 180px;
+	margin: 15px;
+}
+#template{
+	padding: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #ccc;
+	width: 180px;
+	margin: 15px;
+}
+#quick_page{
+	padding: 40px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #ccc;
+	width: 180px;
+	margin: 15px;
+}
+.ws_top {
+	text-decoration: none;
+    text-align: center;
+    border: 2px;
+    outline-style: solid;
+    outline-width: thin;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+	background-color: #ccc;
+}
+h3 {
+	font-size: 155%;
+	padding-top: 75px;
+	margin: 0;
+}
+h4 {
+	font-size: 125%;
+	padding-top: 20px;
+	padding-bottom: 40px;
+	margin: 0;
+}
+#bg_blur{
+	margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+	position: absolute;
+	background-color: hsl(0, 0%, 59%);
+	opacity: 0.75;
+	/* filter: blur(8px);
+	-webkit-filter: blur(8px); */
+	z-index: 12;
+}
+
 .wrapper{
 	display: -ms-grid;
 	display: grid;
@@ -567,6 +647,7 @@ body .sp-preview{
 .loaded .canvas_wrapper canvas{
 	border: 1px solid var(--border-color);
 }
+
 #mouse{
 	position:absolute;
 	pointer-events:none;
