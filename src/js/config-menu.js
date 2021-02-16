@@ -618,6 +618,11 @@ const menuDefinition = [
 				target: 'help/shortcuts.shortcuts'
 			},
 			{
+				name: 'Hide/Show Top Menu',
+				shortcut: 'Ctrl+E',
+				target: 'help/hide.toggle'
+			},
+			{
 				name: 'Report Issues',
 				href: 'https://github.com/viliusle/miniPaint/issues'
 			},

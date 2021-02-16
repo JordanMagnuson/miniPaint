@@ -74,6 +74,7 @@ config.TOOLS = [
 		name: 'select',
 		title: 'Select object tool',
 		attributes: {
+			no_show: true,
 			auto_select: true,
 		},
 	},
@@ -163,8 +164,9 @@ config.TOOLS = [
 		title: 'Border',
 		on_activate: 'on_activate',
 		attributes: {
-			size: 12
-		}
+			size: 12,
+			no_show: true,
+		},
 	},
 	{
 		name: 'undo',
