@@ -44,13 +44,10 @@ class Base_gui_class {
 
 		//common image dimensions
 		this.common_dimensions = [
-			[640, 480, '480p'],
-			[800, 600, 'SVGA'],
-			[1024, 768, 'XGA'],
-			[1280, 720, 'hdtv, 720p'],
-			[1600, 1200, 'UXGA'],
-			[1920, 1080, 'Full HD, 1080p'],
-			[3840, 2160, '4K UHD'],
+			[3600, 3600, '12x12 inches, standard'],
+			[2550, 3300, '8.5x11 inches'],
+			[2400, 3000, '8x10 inches'],
+			[1272, 2475, "Traveler's Notebook"],
 			//[7680,4320, '8K UHD'],
 		];
 
