@@ -44,13 +44,13 @@ class Tools_settings_class {
 		else {
 			var theme = config.themes[0];
 		}
-		
+
 		var t_values = ['squares', 'green', 'grey'];
 
 		//snap
 		var snap_cookie = this.Helper.getCookie('snap');
 		if (snap_cookie === null) {
-			var snap = true; //default
+			var snap = false; //default
 		}
 		else{
 			var snap = Boolean(snap_cookie);
@@ -60,7 +60,7 @@ class Tools_settings_class {
 			title: 'Settings',
 			params: [
 				{name: "transparency", title: "Transparent:", value: transparency},
-				{name: "transparency_type", title: "Transparency background:", 
+				{name: "transparency_type", title: "Transparency background:",
 					value: config.TRANSPARENCY_TYPE, values: t_values},
 				{name: "theme", title: "Theme", values: config.themes, value: theme},
 				{name: "save_resolution", title: "Save resolution:", value: save_resolution},
@@ -105,7 +105,7 @@ class Tools_settings_class {
 		//save theme
 		this.Helper.setCookie('theme', theme);
 		this.Base_gui.change_theme(theme);
-		
+
 		//transparency_type
 		config.TRANSPARENCY_TYPE = params.transparency_type;
 		this.Helper.setCookie('transparency_type', config.TRANSPARENCY_TYPE);
