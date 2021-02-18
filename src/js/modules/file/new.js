@@ -24,7 +24,7 @@ class File_new_class {
 		var w = config.WIDTH;
 		var h = config.HEIGHT;
 		var common_dimensions = this.Base_gui.common_dimensions;
-		var resolutions = ['Custom'];
+		var resolutions = ['Custom (enter pixel dimensions above)'];
 
 		for (var i in common_dimensions) {
 			var value = common_dimensions[i];
@@ -63,8 +63,8 @@ class File_new_class {
 				{name: "width", title: "Width:", value: w},
 				{name: "height", title: "Height:", value: h},
 				{name: "resolution", title: "Resolution:", values: resolutions},
-				{name: "transparency", title: "Transparent:", value: transparency},
-				{name: "save_resolution", title: "Save resolution:", value: save_resolution},
+				// {name: "transparency", title: "Transparent:", value: transparency},
+				// {name: "save_resolution", title: "Save resolution:", value: save_resolution},
 			],
 			on_finish: function (params) {
 				_this.new_handler(params);
