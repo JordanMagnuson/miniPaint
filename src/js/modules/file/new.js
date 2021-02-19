@@ -5,9 +5,9 @@ import Base_layers_class from './../../core/base-layers.js';
 import Helper_class from './../../libs/helpers.js';
 import Dialog_class from './../../libs/popup.js';
 
-/** 
+/**
  * manages files / new
- * 
+ *
  * @author ViliusL
  */
 class File_new_class {
@@ -80,15 +80,15 @@ class File_new_class {
 		var save_resolution = response.save_resolution;
 		var transparency = response.transparency;
 
-		if (resolution != 'Custom') {
+		if (resolution != 'Custom (enter pixel dimensions above)') {
 			var dim = resolution.split(" ");
-			
+
 			dim = dim[0].split("x");
 			width = dim[0];
 			height = dim[1];
 		}
 
-		// Prepare layers		
+		// Prepare layers
 		app.State.do_action(
 			new app.Actions.Bundle_action('new_file', 'New File', [
 				new app.Actions.Prepare_canvas_action('undo'),
