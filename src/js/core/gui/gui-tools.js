@@ -9,6 +9,7 @@ import Helper_class from './../../libs/helpers.js';
 import Help_translate_class from './../../modules/help/translate.js';
 import alertify from './../../../../node_modules/alertifyjs/build/alertify.min.js';
 import Base_gui_class from '../base-gui.js';
+import Base_state_class from '../base-state.js';
 
 var instance = null;
 
@@ -27,6 +28,7 @@ class GUI_tools_class {
 		this.Helper = new Helper_class();
 		this.Help_translate = new Help_translate_class();
 		this.Base_gui = new Base_gui_class();
+		this.Base_state = new Base_state_class();
 
 		//active tool
 		this.active_tool = 'select';
@@ -109,7 +111,16 @@ class GUI_tools_class {
 
 			//event
 			itemDom.addEventListener('click', function (event) {
-				_this.activate_tool(this.id);
+				// bypass for undo/redo buttons sot they do not activate and mess up the undo/redo action stack
+				if(this.id == "undo" || this.id == "redo") {
+					if(this.id == "undo") {
+						_this.Base_state.undo();
+					} else if(this.id == "redo") {
+						_this.Base_state.redo();
+					}
+				} else {
+					_this.activate_tool(this.id);
+				}
 			});
 
 			//register
@@ -139,7 +150,7 @@ class GUI_tools_class {
 	}
 
 	/**
-	 * used strings: 
+	 * used strings:
 	 * "Fill", "Square", "Circle", "Radial", "Anti aliasing", "Circle", "Strict", "Burn"
 	 */
 	show_action_attributes() {

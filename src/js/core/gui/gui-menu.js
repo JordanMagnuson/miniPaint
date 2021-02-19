@@ -35,7 +35,7 @@ class GUI_menu_class {
 
 		var _this = this;
 		document.getElementById("blank_project").addEventListener("click", function() {
-			console.log("time to start a blank project");
+//			console.log("time to start a blank project");
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
 			_this.FNC.new();
