@@ -61,8 +61,9 @@ class Authentication {
 		if (token == null) {
 			return 0;
 		}
-		xhttp.setRequestHeader("X-CSRF-Token", token);
-		xhttp.setRequestHeader("Content-Type", "application/json");
+		// xhttp.setRequestHeader("X-CSRF-Token", token);
+		// xhttp.setRequestHeader("Content-Type", "application/json");
+		console.log(xhttp);
 		xhttp.send();
 		if (xhttp.status == 200) {
 			this.USER = JSON.parse(xhttp.response);
@@ -82,12 +83,12 @@ class Authentication {
 		}
 		xhttp.setRequestHeader("X-CSRF-Token", token);
 		xhttp.setRequestHeader("Content-Type", "application/json");
-		xhttp.send({"username":uname, "password":pass});
+		xhttp.send('{"username":"'+uname+'", "password":"'+pass+'"}');
 		if (xhttp.status == 200) {
-			this.USER = JSON.parse(xhttp.response);
+			this.USER = JSON.parse(xhttp.response).user;
 			return this.USER;
 		} else {
-			console.error("Error getting current user.");
+			console.error("Error logging in.");
 			return null;
 		}
 	}

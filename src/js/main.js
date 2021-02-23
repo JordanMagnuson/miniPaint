@@ -57,6 +57,4 @@ window.addEventListener('load', function (e) {
 
 	Layers.init();
 	var auth = new Authentication();
-	auth.get_token();
-	// auth.get_logged_user();
 }, false);
