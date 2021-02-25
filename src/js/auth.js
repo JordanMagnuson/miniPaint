@@ -63,10 +63,9 @@ class Authentication {
 		}
 		// xhttp.setRequestHeader("X-CSRF-Token", token);
 		// xhttp.setRequestHeader("Content-Type", "application/json");
-		console.log(xhttp);
 		xhttp.send();
 		if (xhttp.status == 200) {
-			this.USER = JSON.parse(xhttp.response);
+			this.USER = JSON.parse(xhttp.response).user;
 			return this.USER;
 		} else {
 			console.error("Error getting current user.");
@@ -91,6 +90,23 @@ class Authentication {
 			console.error("Error logging in.");
 			return null;
 		}
+	}
+
+	login_loop(force_relog = false) {
+		if (this.USER && this.USER.uid != 0 && !force_relog) return this.USER;
+
+		var uname = "";
+		while (uname == ""){
+			uname = prompt("Username:");
+		}
+		if (uname == null) return null;
+		var pass = "";
+		while (pass == "") {
+			pass = prompt("Password:");
+		}
+		if (pass == null) return null;
+
+		return this.login(uname, pass);
 	}
 
 }
