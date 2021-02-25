@@ -5,20 +5,34 @@
 	font-size: 110%;
     color: black;
     background-color: white;
-    right: 35%;
-    bottom: 18%;
+    top: 50%;
+    left: 50%;
     height: 500px;
     width: 800px;
     border: 5px;
     outline-style: solid;
 	outline-width: thin;
 	z-index: 13;
+	margin: auto;
+	transform: translate(-50%, -50%);
 }
 .ws_buttons{
 	position: relative;
 	padding-top: 40px;
 	padding-bottom: 10px;
 }
+.ws_top {
+	text-decoration: none;
+    text-align: center;
+    border: 2px;
+    outline-style: solid;
+    outline-width: thin;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+	background-color: #ccc;
+}
+
 #blank_project{
 	padding: 40px;
 	padding-left: 20px;
@@ -43,17 +57,7 @@
 	width: 180px;
 	margin: 15px;
 }
-.ws_top {
-	text-decoration: none;
-    text-align: center;
-    border: 2px;
-    outline-style: solid;
-    outline-width: thin;
-    margin: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-	background-color: #ccc;
-}
+
 h3 {
 	font-size: 155%;
 	padding-top: 75px;
@@ -78,12 +82,23 @@ h4 {
 	z-index: 12;
 }
 
+@media screen and (max-width:700px){
+	#welcome_screen{
+		width: 500px;
+		height: 600px;
+	}
+	h3 {
+		padding-top: 20px;
+	}
+}
+
+
 .wrapper{
 	display: -ms-grid;
 	display: grid;
 	margin: 0;
 	position: fixed; /* dont change it, vh does not work on mobiles with bottom footer */
-	padding-top: 5px;
+	/*padding-top: 5px;*/
 	top: 0;
 	right: 0;
 	left: 0;
@@ -403,6 +418,8 @@ body .sp-preview{
 /* ========== right sidebar ================================================= */
 
 .sidebar_right{
+	padding-right: 5px;
+	padding-top: 5px;
 	-ms-grid-row: 2;
 	-ms-grid-column: 3;
 	grid-area: sidebar_right;
@@ -420,9 +437,11 @@ body .sp-preview{
 .sidebar_right.active{
 	right: 0 !important;
 }
+/*
 .sidebar_right .block.layers{
 	flex: 1;
 }
+*/
 .sidebar_right .block.layers .content{
 	padding-bottom: 25px;
 }
@@ -623,6 +642,13 @@ body .sp-preview{
 		right: 0;
 		margin-right: 0;
 	}
+}
+
+#info_base {
+	display: none;
+}
+#colors_block {
+	display: none;
 }
 
 /* ========== content ======================================================= */

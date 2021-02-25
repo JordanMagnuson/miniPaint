@@ -44,13 +44,10 @@ class Base_gui_class {
 
 		//common image dimensions
 		this.common_dimensions = [
-			[640, 480, '480p'],
-			[800, 600, 'SVGA'],
-			[1024, 768, 'XGA'],
-			[1280, 720, 'hdtv, 720p'],
-			[1600, 1200, 'UXGA'],
-			[1920, 1080, 'Full HD, 1080p'],
-			[3840, 2160, '4K UHD'],
+			[3600, 3600, '12x12 inches, standard'],
+			[2550, 3300, '8.5x11 inches'],
+			[2400, 3000, '8x10 inches'],
+			[1272, 2475, "Traveler's Notebook"],
 			//[7680,4320, '8K UHD'],
 		];
 
@@ -90,7 +87,7 @@ class Base_gui_class {
 		else {
 			config.TRANSPARENCY = false;
 		}
-		
+
 		//transparency_type
 		var transparency_type = this.Helper.getCookie('transparency_type');
 		if (transparency_type === null) {
@@ -119,9 +116,9 @@ class Base_gui_class {
 		this.prepare_canvas();
 		this.GUI_tools.render_main_tools();
 		this.GUI_preview.render_main_preview();
-		// this.GUI_colors.render_main_colors();
+		 this.GUI_colors.render_main_colors();
 		this.GUI_layers.render_main_layers();
-		// this.GUI_information.render_main_information();
+		 this.GUI_information.render_main_information();
 		this.GUI_details.render_main_details();
 		this.GUI_menu.render_main();
 		this.load_saved_changes();
@@ -236,13 +233,13 @@ class Base_gui_class {
 
 	load_translations() {
 		var lang = this.Helper.getCookie('language');
-		
+
 		//load from params
 		var params = this.Helper.get_url_parameters();
 		if(params.lang != undefined){
 			lang = params.lang.replace(/([^a-z]+)/gi, '');
 		}
-		
+
 		if (lang != null && lang != config.LANG) {
 			config.LANG = lang.replace(/([^a-z]+)/gi, '');
 			this.Help_translate.translate(config.LANG);
@@ -360,10 +357,10 @@ class Base_gui_class {
 			ctx.stroke();
 		}
 	}
-	
+
 	/**
 	 * change draw area size
-	 * 
+	 *
 	 * @param {int} width
 	 * @param {int} height
 	 */
@@ -372,20 +369,20 @@ class Base_gui_class {
 		config.HEIGHT = parseInt(height);
 		this.prepare_canvas();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @returns {object} keys: width, height
 	 */
 	get_visible_area_size() {
 		var wrapper = document.getElementById('main_wrapper');
 		var page_w = wrapper.clientWidth;
 		var page_h = wrapper.clientHeight;
-		
+
 		//find visible size in pixels, but make sure its correct even if image smaller then screen
 		var w = Math.min(Math.ceil(config.WIDTH * config.ZOOM), Math.ceil(page_w / config.ZOOM));
 		var h = Math.min(Math.ceil(config.HEIGHT * config.ZOOM), Math.ceil(page_h / config.ZOOM));
-		
+
 		return {
 			width: w,
 			height: h,
@@ -394,7 +391,7 @@ class Base_gui_class {
 
 	/**
 	 * change theme or set automatically from cookie if possible
-	 * 
+	 *
 	 * @param {string} theme_name
 	 */
 	change_theme(theme_name = null){

@@ -29,9 +29,27 @@ class Help_hide_class {
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
 			this.target.style['display'] = 'inline';
 			this.wrapper.style['top'] = '50px';
+
+			var colors_block = document.getElementById("colors_block");
+			colors_block.style.display = "inline";
+
+			var info_block = document.getElementById("info_base");
+			info_block.style.display = "inline";
+			document.getElementById('details_base').style['display'] = 'inline';
+
+
 		} else {
 			this.target.style['display'] = 'none';
 			this.wrapper.style['top'] = '0px'
+
+			document.getElementById('details_base').style['display'] = 'none';
+			var colors_block = document.getElementById("colors_block");
+			colors_block.style.display = "none";
+
+			var info_block = document.getElementById("info_base");
+			info_block.style.display = "none";
+
+
 		}
 	}
 

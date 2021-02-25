@@ -8,6 +8,7 @@ import menuDefinition from './../../config-menu.js';
 import Help_translate_class from './../../modules/help/translate.js';
 import Layer_new_class from './../../modules/layer/new.js';
 import File_open_class from './../../modules/file/open.js';
+import File_new_class from './../../modules/file/new.js';
 
 /**
  * class responsible for rendering main menu
@@ -24,6 +25,7 @@ class GUI_menu_class {
 		this.lastFocusedMenuBarLink = 0;
 		this.dropdownStack = [];
 		this.FOC = new File_open_class();
+		this.FNC = new File_new_class();
 		this.Help_translate = new Help_translate_class();
 	}
 
@@ -33,9 +35,10 @@ class GUI_menu_class {
 
 		var _this = this;
 		document.getElementById("blank_project").addEventListener("click", function() {
-			console.log("time to start a blank project");
+//			console.log("time to start a blank project");
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
+			_this.FNC.new();
 			blur.remove();
 			welcome_screen.remove();
 		});

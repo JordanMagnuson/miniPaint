@@ -5,9 +5,9 @@ import Base_layers_class from './../../core/base-layers.js';
 import Helper_class from './../../libs/helpers.js';
 import Dialog_class from './../../libs/popup.js';
 
-/** 
+/**
  * manages files / new
- * 
+ *
  * @author ViliusL
  */
 class File_new_class {
@@ -24,7 +24,7 @@ class File_new_class {
 		var w = config.WIDTH;
 		var h = config.HEIGHT;
 		var common_dimensions = this.Base_gui.common_dimensions;
-		var resolutions = ['Custom'];
+		var resolutions = ['Custom (enter pixel dimensions above)'];
 
 		for (var i in common_dimensions) {
 			var value = common_dimensions[i];
@@ -63,8 +63,8 @@ class File_new_class {
 				{name: "width", title: "Width:", value: w},
 				{name: "height", title: "Height:", value: h},
 				{name: "resolution", title: "Resolution:", values: resolutions},
-				{name: "transparency", title: "Transparent:", value: transparency},
-				{name: "save_resolution", title: "Save resolution:", value: save_resolution},
+				// {name: "transparency", title: "Transparent:", value: transparency},
+				// {name: "save_resolution", title: "Save resolution:", value: save_resolution},
 			],
 			on_finish: function (params) {
 				_this.new_handler(params);
@@ -80,15 +80,15 @@ class File_new_class {
 		var save_resolution = response.save_resolution;
 		var transparency = response.transparency;
 
-		if (resolution != 'Custom') {
+		if (resolution != 'Custom (enter pixel dimensions above)') {
 			var dim = resolution.split(" ");
-			
+
 			dim = dim[0].split("x");
 			width = dim[0];
 			height = dim[1];
 		}
 
-		// Prepare layers		
+		// Prepare layers
 		app.State.do_action(
 			new app.Actions.Bundle_action('new_file', 'New File', [
 				new app.Actions.Prepare_canvas_action('undo'),
