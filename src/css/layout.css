@@ -69,6 +69,20 @@ h4 {
 	padding-bottom: 40px;
 	margin: 0;
 }
+
+#projectbar{
+	padding: 0;
+	margin-bottom: 10px;
+	background-color: #222222;
+}
+
+.top_buttons{
+	margin: 3px;	
+}
+#searchbar{
+	margin-left: 4px;
+	margin-bottom: 10px
+}
 #bg_blur{
 	margin:0;
 	padding:0;
