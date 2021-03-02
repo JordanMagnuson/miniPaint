@@ -1,5 +1,3 @@
-
-
 var instance = null;
 
 class Authentication {
@@ -14,29 +12,6 @@ class Authentication {
 
 		return instance;
 	}
-
-	// promise_request(type, URL, data = null, headers = null) {
-	// 	var request = new Promise(function (resolve, reject) {
-	// 		var xhttp = new XMLHttpRequest();
-	// 		xhttp.open(type, URL, true);
-	// 		if (headers) {
-	// 			for (k in headers.keys()) {
-	// 				xhttp.setRequestHeader(k, headers[k]);
-	// 			}
-	// 		}
-	// 		xhttp.onreadystatechange = function() {
-	// 			if (this.readyState == 4) {
-	// 				if (this.status == 200) {
-	// 					resolve(xhttp);
-	// 				} else {
-	// 					reject(this.status);
-	// 				}
-	// 			}
-	// 		}
-	// 		xhttp.send(data);
-	// 	});
-	// 	return request;
-	// }
 
 	get_token() {
 		if (this.TOKEN) return this.TOKEN;

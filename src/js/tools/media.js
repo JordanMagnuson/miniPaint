@@ -107,13 +107,10 @@ class Media_class extends Base_tools_class {
 				}
 				else {
 					//query to service
-//					var URL = "https://pixabay.com/api/?key=" + key + "&per_page=50&q=" + encodeURIComponent(params.query);
 					var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
 					URL += "?key=" + params.query ;
-//					console.log(URL);
 					$.getJSON(URL, function (data) {
 						_this.cache[params.query] = data;
-	//						console.log(data);
 						if (parseInt(data.total) == 0) {
 							alertify.error('Your search did not match any images.');
 						}
