@@ -3,6 +3,8 @@ import Base_tools_class from './../core/base-tools.js';
 import File_open_class from './../modules/file/open.js';
 import Dialog_class from './../libs/popup.js';
 import alertify from './../../../node_modules/alertifyjs/build/alertify.min.js';
+import Authentication from './../auth.js';
+
 
 class Media_class extends Base_tools_class {
 
@@ -12,6 +14,8 @@ class Media_class extends Base_tools_class {
 		this.POP = new Dialog_class();
 		this.name = 'media';
 		this.cache = [];
+		this.auth = new Authentication();
+		console.log(this.auth);
 	}
 
 	load() {
@@ -74,7 +78,13 @@ class Media_class extends Base_tools_class {
 						var data = {
 							url: this.dataset.url,
 						};
-						_this.File_open.file_open_url_handler(data);
+						var auth = new Authentication();
+						var user = auth.get_logged_user();
+						if (!user || (user.uid == 0)) user = auth.login_loop();
+						console.log("user:", user);
+						if (user){
+							_this.File_open.file_open_url_handler(data);
+						}
 						_this.POP.hide();
 					});
 				}
@@ -97,13 +107,10 @@ class Media_class extends Base_tools_class {
 				}
 				else {
 					//query to service
-//					var URL = "https://pixabay.com/api/?key=" + key + "&per_page=50&q=" + encodeURIComponent(params.query);
 					var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
 					URL += "?key=" + params.query ;
-//					console.log(URL);
 					$.getJSON(URL, function (data) {
 						_this.cache[params.query] = data;
-	//						console.log(data);
 						if (parseInt(data.total) == 0) {
 							alertify.error('Your search did not match any images.');
 						}

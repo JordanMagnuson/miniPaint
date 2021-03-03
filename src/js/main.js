@@ -22,6 +22,7 @@ import Base_state_class from './core/base-state.js';
 import File_open_class from './modules/file/open.js';
 import File_save_class from './modules/file/save.js';
 import * as Actions from './actions/index.js';
+import Authentication from './auth.js';
 
 window.addEventListener('load', function (e) {
 	// Initiate app
@@ -55,4 +56,5 @@ window.addEventListener('load', function (e) {
 	GUI.render_main_gui();
 
 	Layers.init();
+	var auth = new Authentication();
 }, false);
