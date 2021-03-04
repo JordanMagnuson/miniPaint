@@ -10,13 +10,13 @@ import GIF from './../../libs/gifjs/gif.js';
 
 var instance = null;
 
-/** 
+/**
  * manages files / save
- * 
+ *
  * @author ViliusL
  */
 class File_save_class {
-	
+
 	constructor() {
 		//singleton
 		if (instance) {
@@ -64,9 +64,9 @@ class File_save_class {
 	save(){
 		var types = JSON.parse(JSON.stringify(this.SAVE_TYPES));
 		for(var i in types){
-			if(i != 'JSON'){
-				delete types[i];
-			}
+//			if(i != 'JSON'){
+//				delete types[i];
+//			}
 		}
 
 		this.save_general(types, 'Save as');
@@ -140,7 +140,7 @@ class File_save_class {
 					for (var i in config.layers) {
 						if (config.layers[i].visible == false)
 							continue;
-						
+
 						new app.Actions.Select_layer_action(config.layers[i].id, true).do();
 						_this.save_action(params, true);
 					}
@@ -366,10 +366,10 @@ class File_save_class {
 			this.update_file_size('-');
 		}
 	}
-	
+
 	/**
 	 * saves data in requested way
-	 * 
+	 *
 	 * @param {object} user_response parameters
 	 * @param {boolean} autoname if use name from layer, false by default
 	 */
@@ -409,7 +409,7 @@ class File_save_class {
 			//temp canvas
 			var canvas;
 			var ctx;
-			
+
 			//get data
 			if (user_response.layers == 'Selected' && type != 'GIF') {
 				canvas = this.Base_layers.convert_layer_to_canvas();
@@ -421,7 +421,7 @@ class File_save_class {
 				canvas.width = config.WIDTH;
 				canvas.height = config.HEIGHT;
 				this.disable_canvas_smooth(ctx);
-				
+
 				this.Base_layers.convert_layers_to_canvas(ctx, null, false);
 			}
 		}
@@ -547,14 +547,14 @@ class File_save_class {
 			});
 		}
 	}
-	
+
 	fillCanvasBackground(ctx, color, width = config.WIDTH, height = config.HEIGHT) {
 		ctx.beginPath();
 		ctx.rect(0, 0, width, height);
 		ctx.fillStyle = color;
 		ctx.fill();
 	}
-	
+
 	check_format_support(canvas, data_header, show_error) {
 		var data = canvas.toDataURL(data_header);
 		var actualType = data.replace(/^data:([^;]*).*/, '$1');
@@ -568,7 +568,7 @@ class File_save_class {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * exports all layers to JSON
 	 */
@@ -637,10 +637,10 @@ class File_save_class {
 
 		return JSON.stringify(export_data, null, "\t");
 	}
-	
+
 	/**
 	 * removes smoothing, because it look ugly during zoom
-	 * 
+	 *
 	 * @param {ctx} ctx
 	 */
 	disable_canvas_smooth(ctx) {

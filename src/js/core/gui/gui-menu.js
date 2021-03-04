@@ -9,6 +9,10 @@ import Help_translate_class from './../../modules/help/translate.js';
 import Layer_new_class from './../../modules/layer/new.js';
 import File_open_class from './../../modules/file/open.js';
 import File_new_class from './../../modules/file/new.js';
+import File_save_class from './../../modules/file/save.js';
+import Media_class from './../../tools/media.js';
+
+
 
 /**
  * class responsible for rendering main menu
@@ -26,6 +30,8 @@ class GUI_menu_class {
 		this.dropdownStack = [];
 		this.FOC = new File_open_class();
 		this.FNC = new File_new_class();
+		this.FSC = new File_save_class();
+		this.MC = new Media_class();
 		this.Help_translate = new Help_translate_class();
 	}
 
@@ -34,15 +40,14 @@ class GUI_menu_class {
 	render_main() {
 
 		var _this = this;
+
 		document.getElementById("blank_project").addEventListener("click", function() {
-//			console.log("time to start a blank project");
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
 			_this.FNC.new();
 			blur.remove();
 			welcome_screen.remove();
 		});
-
 		document.getElementById("template").addEventListener("click", function() {
 			console.log("time to start a template");
 			var blur = document.getElementById("bg_blur");
@@ -51,7 +56,6 @@ class GUI_menu_class {
 			blur.remove();
 			welcome_screen.remove();
 		});
-
 		document.getElementById("quick_page").addEventListener("click", function() {
 			console.log("time to start a quick page");
 				var blur = document.getElementById("bg_blur");
@@ -59,7 +63,21 @@ class GUI_menu_class {
 				_this.FOC.open_file();
 				blur.remove();
 				welcome_screen.remove();
+		});
 
+		document.getElementById("new_button").addEventListener("click", function() {
+			_this.FNC.new();
+		});
+		document.getElementById("open_button").addEventListener("click", function() {
+			_this.FOC.open_file();
+		});
+		document.getElementById("save_button").addEventListener("click", function() {
+			_this.FSC.save();
+		});
+
+		document.getElementById("search_button").addEventListener("click", function() {
+			var query_string = document.getElementById("search_input").value;
+			_this.MC.search(query_string);
 		});
 
 
