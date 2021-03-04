@@ -27,8 +27,15 @@ class Help_hide_class {
 
 	toggle() {
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
+
+
 			this.target.style['display'] = 'inline';
-			this.wrapper.style['top'] = '50px';
+			this.wrapper.style['top'] = '45px';
+
+			var main_menu = document.getElementById("main_menu");
+			main_menu.style["top"] = "65px";
+
+
 
 			var colors_block = document.getElementById("colors_block");
 			colors_block.style.display = "inline";

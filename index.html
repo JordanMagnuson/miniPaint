@@ -30,7 +30,41 @@
 </head>
 <body>
 
+	<div id="bg_blur"></div>
+
+	<div id="welcome_screen">
+		<div class="ws_body">
+			<div class="ws_top">
+			<body>Welcome to [APP NAME]</body>
+			</div>
+			<h3>Welcome to [APP NAME]!</h3>
+			<h4>The fast, easy and free tool for making digital scrapbooking layouts</h4>
+			<body>Need help? Watch this five minute video(hyperlink) on how to get started</body>
+		</div>
+		<div class="ws_buttons">
+			<button type="button" id="blank_project" >Blank Project</button>
+			<button type="button" id="template" >Start from Template</button>
+			<button type="button" id="quick_page" >Start from Quick Page</button>
+		</div>
+		<div class="ws_footer">
+		<body>Already working on something? Open Project(hyperlink) </body>
+		</div>
+	</div>
+
+	<div id ="projectbar">
+		<a class="logo" href="#">miniPaint</a>
+		<button type="button" id="new_button" class="top_buttons" >New Project</button>
+		<button type="button" id="open_button" class="top_buttons" >Open Project</button>
+		<button type="button" id="save_button" class="top_buttons" >Save Project</button>
+		<div id ="searchbar">
+			<input type="text"id="search_input" placeholder="Pixel Scrapper Image Search..">
+			<button type="submit" id="search_button" >Search</i></button>
+		</div>
+	</div>
+
 	<div class="wrapper">
+
+
 		<nav aria-label="Main Menu" class="main_menu" id="main_menu"></nav>
 		<div class="submenu">
 			<a class="logo" href="#">miniPaint</a>
@@ -38,25 +72,7 @@
 		</div>
 
 		<div class="sidebar_left" id="tools_container"></div>
-		<div id="bg_blur"></div>
-		<div id="welcome_screen">
-			<div class="ws_body">
-				<div class="ws_top">
-				<body>Welcome to [APP NAME]</body>
-				</div>
-				<h3>Welcome to [APP NAME]!</h3>
-				<h4>The fast, easy and free tool for making digital scrapbooking layouts</h4>
-				<body>Need help? Watch this five minute video(hyperlink) on how to get started</body>
-			</div>
-			<div class="ws_buttons">
-				<button type="button" id="blank_project" >Blank Project</button>
-				<button type="button" id="template" >Start from Template</button>
-				<button type="button" id="quick_page" >Start from Quick Page</button>
-			</div>
-			<div class="ws_footer">
-			<body>Already working on something? Open Project(hyperlink) </body>
-			</div>
-		</div>
+
 		<div class="main_wrapper" id="main_wrapper">
 		 	<div class="canvas_wrapper" id="canvas_wrapper">
 				<div id="mouse"></div>

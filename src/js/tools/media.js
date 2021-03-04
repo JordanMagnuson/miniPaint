@@ -37,6 +37,8 @@ class Media_class extends Base_tools_class {
 	 * @param {array} data
 	 */
 	search(query = '', data = []) {
+//		console.log("entering search functriuon with query of", query, data);
+
 		var _this = this;
 		var html = '';
 
@@ -55,6 +57,26 @@ class Media_class extends Base_tools_class {
 			html += '<div class="item"></div>';
 			html += '<div class="item"></div>';
 			html += '<div class="item"></div>';
+
+		}
+
+		//auto search on click from GUI search bar
+		if(query != "" && data.length == 0) {
+//			console.log("auto search");
+			var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
+			URL += "?key=" + query ;
+			$.getJSON(URL, function (data) {
+				_this.cache[query] = data;
+				if (parseInt(data.total) == 0) {
+					alertify.error('Your search did not match any images.');
+				}
+				delete data.total;
+				_this.search(query, data);
+			})
+			.fail(function () {
+				alertify.error('Error connecting to service.');
+			});
+			return;
 
 		}
 
