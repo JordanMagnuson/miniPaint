@@ -63,7 +63,7 @@ class Media_class extends Base_tools_class {
 		//auto search on click from GUI search bar
 		if(query != "" && data.length == 0) {
 //			console.log("auto search");
-			var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
+			var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
 			URL += "?key=" + query ;
 			$.getJSON(URL, function (data) {
 				_this.cache[query] = data;
