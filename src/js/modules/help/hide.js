@@ -1,11 +1,16 @@
 import config from './../../config.js';
 import Dialog_class from './../../libs/popup.js';
 import Helper_class from './../../libs/helpers.js';
+import Authentication from './../../auth.js';
+import alertify from './../../../../node_modules/alertifyjs/build/alertify.min.js';
+
 
 class Help_hide_class {
 
 	constructor() {
 		this.Helper = new Helper_class();
+		this.auth = new Authentication();
+
 		this.target = document.getElementById("main_menu");
 		this.wrapper = document.getElementsByClassName('wrapper')[0];
 
@@ -19,13 +24,27 @@ class Help_hide_class {
 				return;
 
 			if (key == "e" && (event.ctrlKey == true || event.metaKey)) {
-				this.toggle();
+				var auth = new Authentication();
+				var user = auth.get_logged_user();
+				if (!user || (user.uid == 0)) user = auth.login_loop();
+				if(user) {
+					var premium = auth.check_premium(user);
+					console.log(premium);
+					if(premium) {
+						this.toggle();
+					} else {
+						alertify.error("must be premium to do this"); //add actual premium dialog here
+					}
+
+					event.preventDefault();
+				}
 				event.preventDefault();
 			}
 		}, false);
 	}
 
 	toggle() {
+
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
 
 

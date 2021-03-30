@@ -37,7 +37,7 @@ class Media_class extends Base_tools_class {
 	 * @param {array} data
 	 */
 	search(query = '', data = []) {
-//		console.log("entering search functriuon with query of", query, data);
+		console.log("entering search functriuon with query of", query, data);
 
 		var _this = this;
 		var html = '';
@@ -80,6 +80,7 @@ class Media_class extends Base_tools_class {
 
 		}
 
+
 		var settings = {
 			title: 'Search',
 			//comment: 'Source: <a class="text_muted" href="https://pixabay.com/">pixabay.com</a>.',
@@ -104,9 +105,22 @@ class Media_class extends Base_tools_class {
 						var user = auth.get_logged_user();
 						if (!user || (user.uid == 0)) user = auth.login_loop();
 						console.log("user:", user);
+
 						if (user){
-							_this.File_open.file_open_url_handler(data);
+							if (auth.check_premium(user)) {
+								_this.File_open.file_open_url_handler(data);
+							} else {
+								console.log(user.imagesUsed);
+								if (user.imagesUsed < config.free_image_limit) {
+									user.imagesUsed += 1;
+									_this.File_open.file_open_url_handler(data);
+								} else {
+									alertify.error("too many images used for free");
+								}
+							}
+
 						}
+
 						_this.POP.hide();
 					});
 				}
