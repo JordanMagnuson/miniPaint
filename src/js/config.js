@@ -148,6 +148,10 @@ config.TOOLS = [
 		name: 'erase',
 		title: 'Erase',
 		on_update: 'on_params_update',
+		attributes: {
+			no_show:true,
+			size:12
+		}
 	},
 	{
 		name: 'shadow_a',

@@ -18,7 +18,7 @@ class Authentication {
 	get_token() {
 		if (this.TOKEN) return this.TOKEN;
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "https://www.pixelscrapper.com/services/auth/user/token.json", false);
+		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/token.json", false);
 		xhttp.send();
 		if (xhttp.status == 200) {
 			this.TOKEN = JSON.parse(xhttp.response).token;
@@ -34,7 +34,7 @@ class Authentication {
 		if (this.USER && !force_ask_server) return this.USER;
 
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "https://www.pixelscrapper.com/services/auth/system/connect.json", false);
+		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/system/connect.json", false);
 		var token = this.get_token();
 		if (token == null) {
 			return 0;
@@ -54,7 +54,7 @@ class Authentication {
 
 	login(uname, pass) {
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "https://www.pixelscrapper.com/services/auth/user/login.json", false);
+		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/login.json", false);
 		var token = this.get_token();
 		if (token == null) {
 			return null;
