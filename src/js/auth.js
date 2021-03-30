@@ -1,3 +1,5 @@
+import alertify from './../../node_modules/alertifyjs/build/alertify.min.js'
+
 var instance = null;
 
 class Authentication {
@@ -23,6 +25,7 @@ class Authentication {
 			return this.TOKEN;
 		} else {
 			console.error("Error getting token.");
+			alertify.error("Error getting token.");
 			return null;
 		}
 	}
@@ -44,6 +47,7 @@ class Authentication {
 			return this.USER;
 		} else {
 			console.error("Error getting current user.");
+			alertify.error("Error getting current user.");
 			return null;
 		}
 	}
@@ -63,6 +67,7 @@ class Authentication {
 			return this.USER;
 		} else {
 			console.error("Error logging in.");
+			alertify.error("Error logging in.");
 			return null;
 		}
 	}
