@@ -16,7 +16,7 @@ class Authentication {
 	get_token() {
 		if (this.TOKEN) return this.TOKEN;
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "https://www.pixelscrapper.com/services/auth/user/token.json", false);
+		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/token.json", false);
 		xhttp.send();
 		if (xhttp.status == 200) {
 			this.TOKEN = JSON.parse(xhttp.response).token;
@@ -31,7 +31,7 @@ class Authentication {
 		if (this.USER && !force_ask_server) return this.USER;
 
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "https://www.pixelscrapper.com/services/auth/system/connect.json", false);
+		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/system/connect.json", false);
 		var token = this.get_token();
 		if (token == null) {
 			return 0;
@@ -50,7 +50,7 @@ class Authentication {
 
 	login(uname, pass) {
 		var xhttp = new XMLHttpRequest();
-		xhttp.open("POST", "https://www.pixelscrapper.com/services/auth/user/login.json", false);
+		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/login.json", false);
 		var token = this.get_token();
 		if (token == null) {
 			return null;
@@ -60,6 +60,7 @@ class Authentication {
 		xhttp.send('{"username":"'+uname+'", "password":"'+pass+'"}');
 		if (xhttp.status == 200) {
 			this.USER = JSON.parse(xhttp.response).user;
+			this.USER.imagesUsed = 0;
 			return this.USER;
 		} else {
 			console.error("Error logging in.");
@@ -82,6 +83,19 @@ class Authentication {
 		if (pass == null) return null;
 
 		return this.login(uname, pass);
+	}
+
+	check_premium(user) {
+		console.log(user.roles);
+		var premium = false;
+		for (const elem in user.roles) {
+			//elem is the number, user.roles[elem] is the words with it
+			if(user.roles[elem] == "subscriber" || user.roles[elem] == "pu subscriber" || user.roles[elem] == "cu subscriber"     ) {
+				console.log("user has role " + user.roles[elem]);
+				premium = true;
+			}
+		} 
+		return premium;
 	}
 
 }

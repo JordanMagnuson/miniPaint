@@ -72,7 +72,7 @@ h4 {
 
 #projectbar{
 	padding: 0;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
 	background-color: #222222;
 }
 
@@ -127,7 +127,7 @@ h4 {
 	bottom: 5px;
 	height: auto;
 	overflow: hidden;
-	margin-top: 80px;
+	margin-top: 73px;
 	-ms-grid-rows: auto 1fr;
 	grid-template-rows: auto 1fr;
 	-ms-grid-columns: auto 1fr auto;
@@ -262,7 +262,7 @@ body .sp-preview{
 	position: relative;
 	display: inline-block;
 	height: 30px;
-	width: 110px;
+	width: fit-content;
 	padding: 5px 5px 5px 36px;
 	margin: 5px;
 	font-size: 14px;
@@ -306,7 +306,7 @@ body .sp-preview{
 	background-color: rgba(255, 255, 255, 0.2);
 	background-color: var(--section-background-color);
 	overflow: hidden;
-	margin-bottom: 5px;
+	/*margin-bottom: 5px;*/
 }
 .attributes{
 	display: flex;
@@ -357,6 +357,7 @@ body .sp-preview{
 	background-color: var(--section-background-color);
 	padding: 0 5px 5px 0;
 	margin-right: 5px;
+	margin-top: 5px;
 	overflow: hidden;
 	align-self: start;
 	width: 40px;

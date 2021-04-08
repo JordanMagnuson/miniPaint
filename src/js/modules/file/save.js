@@ -7,6 +7,9 @@ import alertify from './../../../../node_modules/alertifyjs/build/alertify.min.j
 import canvasToBlob from './../../../../node_modules/blueimp-canvas-to-blob/js/canvas-to-blob.min.js';
 import filesaver from './../../../../node_modules/file-saver/FileSaver.min.js';
 import GIF from './../../libs/gifjs/gif.js';
+import Authentication from './../../auth.js';
+
+
 
 var instance = null;
 
@@ -584,6 +587,14 @@ class File_save_class {
 			mm = '0' + mm;
 		var today = yyyy + '-' + mm + '-' + dd;
 
+		var auth = new Authentication();
+		var user = auth.get_logged_user();
+		var images_used = 0;
+		if(user) {
+			console.log("upon tryint to save, user has used " + user.imagesUsed);
+			images_used = user.imagesUsed;
+		}
+
 		//data
 		var export_data = {};
 		export_data.info = {
@@ -594,6 +605,7 @@ class File_save_class {
 			date: today,
 			version: VERSION,
 			layer_active: config.layer.id,
+			premium_images: images_used
 		};
 
 		//layers

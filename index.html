@@ -33,15 +33,8 @@
 	<div id="bg_blur"></div>
 
 	<div id="welcome_screen">
-		<div class="ws_body">
-			<div class="ws_top">
-			<body>Welcome to [APP NAME]</body>
-			</div>
-			<h3>Welcome to [APP NAME]!</h3>
-			<h4>The fast, easy and free tool for making digital scrapbooking layouts</h4>
-			<body>Need help? Watch this 
-				<a href="video-link">five minute video</a> on how to get started
-			</body>
+		<div class="ws_body" id="ws_body">
+
 		</div>
 		<div class="ws_buttons">
 			<button type="button" id="blank_project" >Blank Project</button>
@@ -56,7 +49,7 @@
 	</div>
 
 	<div id ="projectbar">
-		<a class="logo" href="#">miniPaint</a>
+		<a class="logo" href="#" id="projectbar_appName"></a>
 		<button type="button" id="new_button" class="top_buttons" >New Project</button>
 		<button type="button" id="open_button" class="top_buttons" >Open Project</button>
 		<button type="button" id="save_button" class="top_buttons" >Save Project</button>

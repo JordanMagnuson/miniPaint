@@ -388,6 +388,8 @@ class GUI_tools_class {
 			var submenu = itemContainer.parentElement;
 			submenu.style['display'] = 'flex';
 		}
+
+		this.Base_gui.prepare_canvas();
 	}
 
 }

@@ -37,7 +37,7 @@ class Media_class extends Base_tools_class {
 	 * @param {array} data
 	 */
 	search(query = '', data = []) {
-//		console.log("entering search functriuon with query of", query, data);
+		console.log("entering search functriuon with query of", query, data);
 
 		var _this = this;
 		var html = '';
@@ -63,7 +63,7 @@ class Media_class extends Base_tools_class {
 		//auto search on click from GUI search bar
 		if(query != "" && data.length == 0) {
 //			console.log("auto search");
-			var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
+			var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
 			URL += "?key=" + query ;
 			$.getJSON(URL, function (data) {
 				_this.cache[query] = data;
@@ -79,6 +79,7 @@ class Media_class extends Base_tools_class {
 			return;
 
 		}
+
 
 		var settings = {
 			title: 'Search',
@@ -104,9 +105,22 @@ class Media_class extends Base_tools_class {
 						var user = auth.get_logged_user();
 						if (!user || (user.uid == 0)) user = auth.login_loop();
 						console.log("user:", user);
+
 						if (user){
-							_this.File_open.file_open_url_handler(data);
+							if (auth.check_premium(user)) {
+								_this.File_open.file_open_url_handler(data);
+							} else {
+								console.log(user.imagesUsed);
+								if (user.imagesUsed < config.free_image_limit) {
+									user.imagesUsed += 1;
+									_this.File_open.file_open_url_handler(data);
+								} else {
+									alertify.error("too many images used for free");
+								}
+							}
+
 						}
+
 						_this.POP.hide();
 					});
 				}

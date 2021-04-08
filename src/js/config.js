@@ -19,6 +19,10 @@ config.layer = null;
 config.need_render = false;
 config.need_render_changed_params = false; // Set specifically when param change in layer details triggered render
 config.mouse = {};
+config.upgrade_cost = "$Dollars.cents";
+config.app_name = "App Name TBD";
+config.free_image_limit = 5;
+config.tutorial_link = "link in config";
 config.swatches = {
 	default: [] // Only default used right now, object format for swatch swapping in future.
 };
@@ -148,6 +152,10 @@ config.TOOLS = [
 		name: 'erase',
 		title: 'Erase',
 		on_update: 'on_params_update',
+		attributes: {
+			no_show:true,
+			size:12
+		}
 	},
 	{
 		name: 'shadow_a',
@@ -361,5 +369,5 @@ config.TOOL = config.TOOLS[0];
 // //link to active tool
 // config.TOOL = config.TOOLS[2];
 // >>>>>>> master
-	
+
 export default config;
