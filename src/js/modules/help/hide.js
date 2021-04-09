@@ -1,6 +1,7 @@
 import config from './../../config.js';
 import Dialog_class from './../../libs/popup.js';
 import Helper_class from './../../libs/helpers.js';
+import Base_gui_class from './../../core/base-gui.js';
 import Authentication from './../../auth.js';
 import alertify from './../../../../node_modules/alertifyjs/build/alertify.min.js';
 
@@ -10,7 +11,7 @@ class Help_hide_class {
 	constructor() {
 		this.Helper = new Helper_class();
 		this.auth = new Authentication();
-
+		this.Base_gui = new Base_gui_class();
 		this.target = document.getElementById("main_menu");
 		this.wrapper = document.getElementsByClassName('wrapper')[0];
 
@@ -32,8 +33,11 @@ class Help_hide_class {
 					console.log(premium);
 					if(premium) {
 						this.toggle();
+						this.Base_gui.prepare_canvas();
+
 					} else {
 						alertify.error("must be premium to do this"); //add actual premium dialog here
+						auth.prompt_upgrade();
 					}
 
 					event.preventDefault();
@@ -47,13 +51,14 @@ class Help_hide_class {
 
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
 
+			var projectbar = document.getElementById("projectbar");
+			projectbar.style["padding-top"] = "45px";
 
 			this.target.style['display'] = 'inline';
 			this.wrapper.style['top'] = '45px';
 
 			var main_menu = document.getElementById("main_menu");
-			main_menu.style["top"] = "65px";
-
+			main_menu.style["top"] = "0px";
 
 
 			var colors_block = document.getElementById("colors_block");
@@ -67,6 +72,9 @@ class Help_hide_class {
 		} else {
 			this.target.style['display'] = 'none';
 			this.wrapper.style['top'] = '0px'
+
+			var projectbar = document.getElementById("projectbar");
+			projectbar.style["padding-top"] = "0px";
 
 			document.getElementById('details_base').style['display'] = 'none';
 			var colors_block = document.getElementById("colors_block");

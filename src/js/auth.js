@@ -98,6 +98,10 @@ class Authentication {
 		return premium;
 	}
 
+	prompt_upgrade() {
+
+	}
+
 }
 
 export default Authentication;

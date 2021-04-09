@@ -160,14 +160,14 @@ export class Insert_layer_action extends Base_action {
 			await image_load_promise;
 		}
 
-		if (autoresize_as) {
-			this.autoresize_canvas_action = new app.Actions.Autoresize_canvas_action(...autoresize_as);
-			try {
-				await this.autoresize_canvas_action.do();
-			} catch(error) {
-				this.autoresize_canvas_action = null;
-			}
-		}
+		// if (autoresize_as) {
+		// 	this.autoresize_canvas_action = new app.Actions.Autoresize_canvas_action(...autoresize_as);
+		// 	try {
+		// 		await this.autoresize_canvas_action.do();
+		// 	} catch(error) {
+		// 		this.autoresize_canvas_action = null;
+		// 	}
+		// }
 
 		app.Layers.render();
 		app.GUI.GUI_layers.render_layers();
@@ -176,10 +176,10 @@ export class Insert_layer_action extends Base_action {
 	async undo() {
 		super.undo();
 		app.Layers.auto_increment = this.previous_auto_increment;
-		if (this.autoresize_canvas_action) {
-			await this.autoresize_canvas_action.undo();
-			this.autoresize_canvas_action = null;
-		}
+		// if (this.autoresize_canvas_action) {
+		// 	await this.autoresize_canvas_action.undo();
+		// 	this.autoresize_canvas_action = null;
+		// }
 		if (this.inserted_layer_id) {
 			config.layers.pop();
 			this.inserted_layer_id = null;
