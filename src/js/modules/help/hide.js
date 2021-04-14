@@ -2,6 +2,8 @@ import config from './../../config.js';
 import Dialog_class from './../../libs/popup.js';
 import Helper_class from './../../libs/helpers.js';
 import Base_gui_class from './../../core/base-gui.js';
+import GUI_tools_class from './../../core/gui/gui-tools.js';
+
 import Authentication from './../../auth.js';
 import alertify from './../../../../node_modules/alertifyjs/build/alertify.min.js';
 
@@ -12,6 +14,7 @@ class Help_hide_class {
 		this.Helper = new Helper_class();
 		this.auth = new Authentication();
 		this.Base_gui = new Base_gui_class();
+		this.GUI_tools = new GUI_tools_class();
 		this.target = document.getElementById("main_menu");
 		this.wrapper = document.getElementsByClassName('wrapper')[0];
 
@@ -36,8 +39,7 @@ class Help_hide_class {
 						this.Base_gui.prepare_canvas();
 
 					} else {
-						alertify.error("must be premium to do this"); //add actual premium dialog here
-						auth.prompt_upgrade();
+						auth.prompt_upgrade("Advanced Mode");
 					}
 
 					event.preventDefault();
@@ -50,6 +52,9 @@ class Help_hide_class {
 	toggle() {
 
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
+
+			config.TOOLS = config.TOOLS_ADVANCED;
+			this.GUI_tools.render_main_tools();
 
 			var projectbar = document.getElementById("projectbar");
 			projectbar.style["padding-top"] = "45px";
@@ -70,6 +75,8 @@ class Help_hide_class {
 
 
 		} else {
+			config.TOOLS = config.TOOLS_BASE;
+			this.GUI_tools.render_main_tools();
 			this.target.style['display'] = 'none';
 			this.wrapper.style['top'] = '0px'
 

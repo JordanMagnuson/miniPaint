@@ -39,6 +39,8 @@ class GUI_menu_class {
 
 	render_main() {
 
+		document.getElementById("welcome_screen").style.visibility = "visible";
+
 		document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body>Welcome to ' + config.app_name +  ' </body> </div> <h3>Welcome to ' + config.app_name +  '!</h3> <h4>The fast, easy and free tool for making digital scrapbooking layouts</h4><body>Need help? Watch this <a href=""> five minute video </a> ' + config.tutorial_link +  ' on how to get started</body> ' ;
 		document.getElementById("projectbar_appName").innerHTML = config.app_name;
 
@@ -48,24 +50,37 @@ class GUI_menu_class {
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
 			_this.FNC.new();
-			blur.remove();
-			welcome_screen.remove();
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("template").addEventListener("click", function() {
 			console.log("time to start a template");
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
 			_this.FOC.open_file();
-			blur.remove();
-			welcome_screen.remove();
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("quick_page").addEventListener("click", function() {
 			console.log("time to start a quick page");
 				var blur = document.getElementById("bg_blur");
 				var welcome_screen = document.getElementById("welcome_screen");
 				_this.FOC.open_file();
-				blur.remove();
-				welcome_screen.remove();
+				blur.style.visibility = "hidden";
+				welcome_screen.style.visibility = "hidden";
+		});
+		document.getElementById("upgrade_button").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var upgrade_dialog = document.getElementById("upgrade_dialog");
+			blur.style.visibility = "hidden";
+			upgrade_dialog.style.visibility = "hidden";
+			window.location = "https://www.digitalscrapbook.com/user/login?destination=user/login%3Freturn%3D/login_success%26uv_login%3D1%26uv_size%3Dpopup%26uv_ssl%3D1";
+		});
+		document.getElementById("cancel_upgrade").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var upgrade_dialog = document.getElementById("upgrade_dialog");
+			blur.style.visibility = "hidden";
+			upgrade_dialog.style.visibility = "hidden";
 		});
 
 		document.getElementById("new_button").addEventListener("click", function() {

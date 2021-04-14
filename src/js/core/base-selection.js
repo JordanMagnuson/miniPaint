@@ -25,7 +25,7 @@ class Base_selection_class {
 	 * - enable_background
 	 * - enable_borders
 	 * - enable_controls
-	 * 
+	 *
 	 * @param {ctx} ctx
 	 * @param {object} settings
 	 * @param {string|null} key
@@ -161,7 +161,7 @@ class Base_selection_class {
 		var h = settings.data.height;
 
 		if (x == null || y == null || w == null || h == null) {
-			//not supported 
+			//not supported
 			return;
 		}
 
@@ -188,7 +188,7 @@ class Base_selection_class {
 			x = Math.round(-data.width / 2);
 			y = Math.round(-data.height / 2);
 		}
-		
+
 		//fill
 		if (settings.enable_background == true) {
 			this.ctx.fillStyle = "rgba(0, 255, 0, 0.3)";
@@ -201,10 +201,10 @@ class Base_selection_class {
 		//borders
 		if (settings.enable_borders == true && (x != 0 || y != 0 || w != config.WIDTH || h != config.HEIGHT)) {
 			this.ctx.lineWidth = wholeLineWidth;
-			this.ctx.strokeStyle = 'rgb(255, 255, 255)';
+			this.ctx.strokeStyle = 'rgb(102, 153, 204)';
 			this.ctx.strokeRect(x - halfLineWidth, y - halfLineWidth, w + wholeLineWidth, h + wholeLineWidth);
 			this.ctx.lineWidth = halfLineWidth;
-			this.ctx.strokeStyle = 'rgb(0, 0, 0)';
+			this.ctx.strokeStyle = 'rgb(102, 153, 204)';
 			this.ctx.strokeRect(x - wholeLineWidth, y - wholeLineWidth, w + (wholeLineWidth * 2), h + (wholeLineWidth * 2));
 		}
 
@@ -346,7 +346,7 @@ class Base_selection_class {
 				&& ['line', 'arrow', 'gradient'].includes(settings.data.render_function[0]);
 
 			mainWrapper.style.cursor = "pointer";
-			
+
 			var is_ctrl = false;
 			if (e.ctrlKey == true || e.metaKey) {
 				is_ctrl = true;
@@ -356,7 +356,7 @@ class Base_selection_class {
 			const is_drag_type_right = Math.floor(drag_type / DRAG_TYPE_RIGHT) % 2 === 1;
 			const is_drag_type_top = Math.floor(drag_type / DRAG_TYPE_TOP) % 2 === 1;
 			const is_drag_type_bottom = Math.floor(drag_type / DRAG_TYPE_BOTTOM) % 2 === 1;
-			
+
 			if (e.buttons == 1 || typeof e.buttons == "undefined") {
 				// Do transformations
 				var dx = Math.round(mouse.x - mouse.click_x);
@@ -369,7 +369,7 @@ class Base_selection_class {
 					width = this.click_details.width - dx;
 
 				// Keep ratio - (if drag_type power of 2, only dragging on single axis)
-				if (drag_type && (drag_type & (drag_type - 1)) !== 0 && (settings.keep_ratio == true && is_ctrl == false) 
+				if (drag_type && (drag_type & (drag_type - 1)) !== 0 && (settings.keep_ratio == true && is_ctrl == false)
 					|| (settings.keep_ratio !== true && is_ctrl == true)){
 					var ratio = this.click_details.width / this.click_details.height;
 					var width_new = Math.round(height * ratio);
@@ -394,7 +394,7 @@ class Base_selection_class {
 					settings.data.width = width;
 				if (is_drag_type_top || is_drag_type_bottom)
 					settings.data.height = height;
-				
+
 				// Don't allow negative width/height on most layers
 				if (!allowNegativeDimensions) {
 					if (settings.data.width <= 0) {

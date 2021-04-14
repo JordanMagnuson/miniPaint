@@ -1,4 +1,5 @@
 var instance = null;
+import config from './config.js';
 
 class Authentication {
 
@@ -94,11 +95,15 @@ class Authentication {
 				console.log("user has role " + user.roles[elem]);
 				premium = true;
 			}
-		} 
+		}
 		return premium;
 	}
 
-	prompt_upgrade() {
+	prompt_upgrade(reason) {
+		document.getElementById("upgrade_dialog").style.visibility = "visible";
+		var blur = document.getElementById("bg_blur").style.visibility = "visible";
+		document.getElementById("upgrade_reason").innerHTML = "<h3>" + reason + " requires " + config.app_name + " Premium</h3>";
+
 
 	}
 

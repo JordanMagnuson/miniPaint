@@ -114,7 +114,7 @@ class Media_class extends Base_tools_class {
 									user.imagesUsed += 1;
 									_this.File_open.file_open_url_handler(data);
 								} else {
-									alertify.error("too many images used for free");
+									auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
 								}
 							}
 
