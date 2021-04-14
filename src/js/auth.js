@@ -89,7 +89,6 @@ class Authentication {
 		xhttp.send('{"username":"'+uname+'", "password":"'+pass+'"}');
 		if (xhttp.status == 200) {
 			this.USER = JSON.parse(xhttp.response).user;
-			this.USER.imagesUsed = 0;
 			return this.USER;
 		} else {
 			console.error("Error logging in.");
