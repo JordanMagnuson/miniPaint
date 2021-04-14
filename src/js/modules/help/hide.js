@@ -1,11 +1,20 @@
 import config from './../../config.js';
 import Dialog_class from './../../libs/popup.js';
 import Helper_class from './../../libs/helpers.js';
+import Base_gui_class from './../../core/base-gui.js';
+import GUI_tools_class from './../../core/gui/gui-tools.js';
+
+import Authentication from './../../auth.js';
+import alertify from './../../../../node_modules/alertifyjs/build/alertify.min.js';
+
 
 class Help_hide_class {
 
 	constructor() {
 		this.Helper = new Helper_class();
+		this.auth = new Authentication();
+		this.Base_gui = new Base_gui_class();
+		this.GUI_tools = new GUI_tools_class();
 		this.target = document.getElementById("main_menu");
 		this.wrapper = document.getElementsByClassName('wrapper')[0];
 
@@ -19,22 +28,42 @@ class Help_hide_class {
 				return;
 
 			if (key == "e" && (event.ctrlKey == true || event.metaKey)) {
-				this.toggle();
+				var auth = new Authentication();
+				var user = auth.get_logged_user();
+				if (!user || (user.uid == 0)) user = auth.login_loop();
+				if(user) {
+					var premium = auth.check_premium(user);
+					console.log(premium);
+					if(premium) {
+						this.toggle();
+						this.Base_gui.prepare_canvas();
+
+					} else {
+						auth.prompt_upgrade("Advanced Mode");
+					}
+
+					event.preventDefault();
+				}
 				event.preventDefault();
 			}
 		}, false);
 	}
 
 	toggle() {
+
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
 
+			config.TOOLS = config.TOOLS_ADVANCED;
+			this.GUI_tools.render_main_tools();
+
+			var projectbar = document.getElementById("projectbar");
+			projectbar.style["padding-top"] = "45px";
 
 			this.target.style['display'] = 'inline';
 			this.wrapper.style['top'] = '45px';
 
 			var main_menu = document.getElementById("main_menu");
-			main_menu.style["top"] = "65px";
-
+			main_menu.style["top"] = "0px";
 
 
 			var colors_block = document.getElementById("colors_block");
@@ -46,8 +75,13 @@ class Help_hide_class {
 
 
 		} else {
+			config.TOOLS = config.TOOLS_BASE;
+			this.GUI_tools.render_main_tools();
 			this.target.style['display'] = 'none';
 			this.wrapper.style['top'] = '0px'
+
+			var projectbar = document.getElementById("projectbar");
+			projectbar.style["padding-top"] = "0px";
 
 			document.getElementById('details_base').style['display'] = 'none';
 			var colors_block = document.getElementById("colors_block");

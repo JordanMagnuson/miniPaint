@@ -88,6 +88,8 @@ class GUI_tools_class {
 			this.active_tool = saved_tool;
 		}
 
+		//to allow for reloading the toolbar from scratch while running app, without this line it would simply append to what is already there
+		document.getElementById(target_id).innerHTML = '';
 		//left menu
 		for (var i in config.TOOLS) {
 			var item = config.TOOLS[i];

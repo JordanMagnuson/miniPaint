@@ -49,9 +49,11 @@ class File_open_class {
 		var _this = this;
 
 		window.ondrop = function (e) {
+			document.getElementById("loader").style.display = "block";
 			//drop
 			e.preventDefault();
 			_this.open_handler(e);
+			document.getElementById("loader").style.display = "none";
 		};
 		window.ondragover = function (e) {
 			e.preventDefault();
@@ -261,6 +263,7 @@ class File_open_class {
 	}
 
 	open_handler(e) {
+		document.getElementById("loader").style.display = "block";
 		var _this = this;
 		var files = e.target.files;
 
@@ -295,9 +298,11 @@ class File_open_class {
 			FR.file = files[i];
 
 			if (f.name.match('.psd')) {
+				document.getElementById("loader").style.display = "block";
 				PSD.fromEvent(e).then(function (psd) {
 					_this.new_load_psd(psd);
 				});
+				document.getElementById("loader").style.display = "none";
 				return;
 			}
 
@@ -333,6 +338,7 @@ class File_open_class {
 			else
 				FR.readAsDataURL(f);
 		}
+		document.getElementById("loader").style.display = "none";
 	}
 
 	open_template_test(){
@@ -418,51 +424,52 @@ class File_open_class {
 
 
 
-	load_psd(psd) {
-
-		var children = psd.tree().children();
-		var doc = psd.tree().export().document;
-		var max_id_order = 0;
-
-		config.ZOOM = 1;
-		config.WIDTH = doc.width;
-		config.HEIGHT = doc.height;
-		this.Base_layers.reset_layers();
-		this.Base_gui.prepare_canvas();
-
-		for (var node = children.length - 1; node >= 0; node--) {
-			var child = children[node];
-			var value = {};
-			var png = child.layer.image.toPng();
-			var opacity = child.layer.opacity;
-			value.type = 'image';
-			value.name = child.name;
-			value.id = node;
-			value.height = child.layer.height;
-			value.width = child.layer.width;
-			value.x = child.layer.left;
-			value.y = child.layer.top;
-			value.data = png.src;
-			value.opacity = (opacity * 100 / 255.0);
-			value.order = children.length - node;
-			console.log(value)
-
-			app.State.do_action(
-				new app.Actions.Bundle_action('open_image', 'Open Image', [
-					new app.Actions.Insert_layer_action(value)
-				])
-			);
-
-		}
-
-		this.Base_layers.auto_increment = children.length + 1;
-
-
-	}
+	// load_psd(psd) {
+	//
+	// 	var children = psd.tree().children();
+	// 	var doc = psd.tree().export().document;
+	// 	var max_id_order = 0;
+	//
+	// 	config.ZOOM = 1;
+	// 	config.WIDTH = doc.width;
+	// 	config.HEIGHT = doc.height;
+	// 	this.Base_layers.reset_layers();
+	// 	this.Base_gui.prepare_canvas();
+	//
+	// 	for (var node = children.length - 1; node >= 0; node--) {
+	// 		var child = children[node];
+	// 		var value = {};
+	// 		var png = child.layer.image.toPng();
+	// 		var opacity = child.layer.opacity;
+	// 		value.type = 'image';
+	// 		value.name = child.name;
+	// 		value.id = node;
+	// 		value.height = child.layer.height;
+	// 		value.width = child.layer.width;
+	// 		value.x = child.layer.left;
+	// 		value.y = child.layer.top;
+	// 		value.data = png.src;
+	// 		value.opacity = (opacity * 100 / 255.0);
+	// 		value.order = children.length - node;
+	// 		console.log(value)
+	//
+	// 		app.State.do_action(
+	// 			new app.Actions.Bundle_action('open_image', 'Open Image', [
+	// 				new app.Actions.Insert_layer_action(value)
+	// 			])
+	// 		);
+	//
+	// 	}
+	//
+	// 	this.Base_layers.auto_increment = children.length + 1;
+	//
+	//
+	// }
 
 
 
 	async new_load_psd(psd) {
+		document.getElementById("loader").style.display = "block";
 		var children = psd.tree().children();
 		var doc = psd.tree().export().document;
 
@@ -518,6 +525,7 @@ class File_open_class {
 		await app.State.do_action(
 			new app.Actions.Bundle_action('open_json_file', 'Open JSON File', actions)
 		);
+		document.getElementById("loader").style.display = "none";
 	}
 
 

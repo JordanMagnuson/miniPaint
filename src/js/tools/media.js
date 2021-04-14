@@ -37,7 +37,7 @@ class Media_class extends Base_tools_class {
 	 * @param {array} data
 	 */
 	search(query = '', data = []) {
-//		console.log("entering search functriuon with query of", query, data);
+		console.log("entering search functriuon with query of", query, data);
 
 		var _this = this;
 		var html = '';
@@ -49,7 +49,7 @@ class Media_class extends Base_tools_class {
 			for (var i in data) {
 				html += '<div class="item">';
 //				html += '	<img class="displayBlock pointer" alt="" src="' + data[i].previewURL + '" data-url="' + data[i].webformatURL + '" />';
-				html += '	<img class="displayBlock pointer" alt="" src="' + data[i].fields.ss_image_thumbnail_url + '" data-url="' + data[i].fields.ss_image_url + '" />';
+				html += '	<img class="displayBlock pointer" alt="" src="' + data[i].ss_image_thumbnail_url + '" data-url="' + data[i].ss_image_url + '" />';
 				html += '</div>';
 			}
 			//fix for last line
@@ -64,7 +64,7 @@ class Media_class extends Base_tools_class {
 		if(query != "" && data.length == 0) {
 //			console.log("auto search");
 			var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
-			URL += "?key=" + query ;
+			URL += "?search_page_id=browse_graphics&fields=title,ss_image_thumbnail_url,ss_image_url&key=" + query ;
 			$.getJSON(URL, function (data) {
 				_this.cache[query] = data;
 				if (parseInt(data.total) == 0) {
@@ -80,9 +80,9 @@ class Media_class extends Base_tools_class {
 
 		}
 
+
 		var settings = {
 			title: 'Search',
-			//comment: 'Source: <a class="text_muted" href="https://pixabay.com/">pixabay.com</a>.',
 			className: 'wide',
 			params: [
 				{name: "query", title: "Keyword:", value: query},
@@ -102,15 +102,25 @@ class Media_class extends Base_tools_class {
 						};
 						var auth = new Authentication();
 						var user = auth.get_logged_user();
-						console.log("user in media call:", user);
-						if (/*user is premium*/){
-							_this.File_open.file_open_url_handler(data);
-							_this.POP.hide(); // hide only if logged in and insertable.
+						if (!user || (user.uid == 0)) user = auth.login_loop();
+						console.log("user:", user);
+
+						if (user){
+							if (auth.check_premium(user)) {
+								_this.File_open.file_open_url_handler(data);
+							} else {
+								console.log(user.imagesUsed);
+								if (user.imagesUsed < config.free_image_limit) {
+									user.imagesUsed += 1;
+									_this.File_open.file_open_url_handler(data);
+								} else {
+									auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
+								}
+							}
+
 						}
-						else {
-							alertify.error("Not logged in! Please log in to continue.");
-							auth.login_loop();
-						}
+
+						_this.POP.hide();
 					});
 				}
 			},
@@ -148,6 +158,8 @@ class Media_class extends Base_tools_class {
 				}
 			},
 		};
+		console.log("about to log settings");
+		console.log(settings);
 		this.POP.show(settings);
 	}
 }

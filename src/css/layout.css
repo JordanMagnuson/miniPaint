@@ -15,12 +15,50 @@
 	z-index: 13;
 	margin: auto;
 	transform: translate(-50%, -50%);
+	visibility: hidden;
 }
+
+#upgrade_dialog{
+	position: absolute;
+	text-align: center;
+	font-size: 110%;
+    color: black;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    height: 520px;
+    width: 800px;
+    border: 5px;
+    outline-style: solid;
+	outline-width: thin;
+	z-index: 13;
+	margin: auto;
+	transform: translate(-50%, -50%);
+	visibility: hidden;
+}
+
 .ws_buttons{
 	position: relative;
 	padding-top: 40px;
 	padding-bottom: 10px;
 }
+
+.upgrade_body{
+text-align: left;
+margin-left: 20px;
+}
+
+.upgrade_footer{
+text-align: left;
+margin-left: 20px;
+}
+
+.upgrade_cancel{
+text-align: right;
+margin-right: 20px;
+margin-bottom: 10px;
+}
+
 .ws_top {
 	text-decoration: none;
     text-align: center;
@@ -31,6 +69,24 @@
     padding-top: 10px;
     padding-bottom: 10px;
 	background-color: #ccc;
+}
+
+#upgrade_button{
+	padding: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #ccc;
+	width: 180px;
+	margin: 15px;
+}
+
+#cancel_upgrade{
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #ccc;
+	width: 120px;
+	margin: 15px;
 }
 
 #blank_project{
@@ -98,7 +154,7 @@ h4 {
 
 .top_buttons{
 	margin: 3px;
-	width: 15%;
+	width: 12%;
 }
 #searchbar{
 	width: inherit;
@@ -106,10 +162,13 @@ h4 {
 	padding-bottom: 10px
 }
 #search_input{
-	width: 79%;
+	width: 41%;
 }
 #search_button{
-	width: 20%
+	width: 10%;
+}
+#projectbar_appName{
+	width: 10%;
 }
 #bg_blur{
 	margin:0;
@@ -134,20 +193,47 @@ h4 {
 	}
 }
 
+#loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position:fixed;
+	z-index: 100;
+	display: none;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 .wrapper{
 	display: -ms-grid;
 	display: grid;
 	margin: 0;
 	position: fixed; /* dont change it, vh does not work on mobiles with bottom footer */
-	/*padding-top: 5px;*/
+	/* padding-top: 5px; */
 	top: 0;
 	right: 0;
 	left: 0;
 	bottom: 5px;
 	height: auto;
 	overflow: hidden;
-	margin-top: 73px;
+	margin-top: 40px;
 	-ms-grid-rows: auto 1fr;
 	grid-template-rows: auto 1fr;
 	-ms-grid-columns: auto 1fr auto;
@@ -282,7 +368,7 @@ body .sp-preview{
 	position: relative;
 	display: inline-block;
 	height: 30px;
-	width: 110px;
+	width: fit-content;
 	padding: 5px 5px 5px 36px;
 	margin: 5px;
 	font-size: 14px;
@@ -323,6 +409,7 @@ body .sp-preview{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	margin-bottom: 5px;
 	background-color: rgba(255, 255, 255, 0.2);
 	background-color: var(--section-background-color);
 	overflow: hidden;
@@ -377,7 +464,8 @@ body .sp-preview{
 	background-color: var(--section-background-color);
 	padding: 0 5px 5px 0;
 	margin-right: 5px;
-	margin-top: 5px;
+	margin-top: 0px;
+	margin-left: 5px;
 	overflow: hidden;
 	align-self: start;
 	width: 40px;
@@ -426,6 +514,7 @@ body .sp-preview{
 .sidebar_left .magic_erase:after{ background-image: url('images/icons/magic_erase.svg'); }
 .sidebar_left .fill:after{ background-image: url('images/icons/fill.svg'); }
 .sidebar_left .media:after{ background-image: url('images/icons/media.svg'); }
+.sidebar_left .line:after{ background-image: url('images/icons/line.svg'); }
 .sidebar_left .shape:after{ background-image: url('images/icons/shape.svg'); }
 .sidebar_left .undo:after{ background-image: url('images/icons/undo.svg'); }
 .sidebar_left .redo:after{ background-image: url('images/icons/redo.svg'); }
@@ -462,7 +551,7 @@ body .sp-preview{
 
 .sidebar_right{
 	padding-right: 5px;
-	padding-top: 5px;
+	padding-top: 0px;
 	-ms-grid-row: 2;
 	-ms-grid-column: 3;
 	grid-area: sidebar_right;
