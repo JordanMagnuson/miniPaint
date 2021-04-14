@@ -11,12 +11,11 @@ class Authentication {
 		}
 		instance = this;
 		this.TOKEN = this.get_token();
-		this.USER = null;
+		this.USER = this.get_logged_user();
 		this.awaiting_login = false;
 
-		document.getElementById("loginsubmit").addEventListener("click", function() {
-			this.login();
-		});
+		document.getElementById("loginsubmit").addEventListener("click", this.login);
+		document.getElementById("logincancel").addEventListener("click", this.cancelLogin);
 
 		return instance;
 	}
@@ -65,6 +64,8 @@ class Authentication {
 	}
 
 	login() {
+		var _this = new Authentication();
+
 		var loginform = document.getElementById("logindialogue").firstElementChild;
 		var uname = loginform.elements.uname.value;
 		var pword = loginform.elements.pword.value;
@@ -75,21 +76,21 @@ class Authentication {
 		}
 		document.getElementById("logindialogue").style["display"] = "none";
 		loginform.reset();
-		this.awaiting_login = false;
+		_this.awaiting_login = false;
 
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/login.json", false);
-		var token = this.get_token();
-		if (token == null) {
+		console.log(_this);
+		if (_this.TOKEN == null) {
 			alertify.error("Could not establish a connection.");
 			return null;
 		}
-		xhttp.setRequestHeader("X-CSRF-Token", token);
+		xhttp.setRequestHeader("X-CSRF-Token", _this.TOKEN);
 		xhttp.setRequestHeader("Content-Type", "application/json");
-		xhttp.send('{"username":"'+uname+'", "password":"'+pass+'"}');
+		xhttp.send('{"username":"'+uname+'", "password":"'+pword+'"}');
 		if (xhttp.status == 200) {
-			this.USER = JSON.parse(xhttp.response).user;
-			return this.USER;
+			_this.USER = JSON.parse(xhttp.response).user;
+			return _this.USER;
 		} else {
 			console.error("Error logging in.");
 			alertify.error("Error logging in.");
