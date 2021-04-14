@@ -102,12 +102,15 @@ class Media_class extends Base_tools_class {
 						};
 						var auth = new Authentication();
 						var user = auth.get_logged_user();
-						if (!user || (user.uid == 0)) user = auth.login_loop();
-						console.log("user:", user);
-						if (user){
+						console.log("user in media call:", user);
+						if (/*user is premium*/){
 							_this.File_open.file_open_url_handler(data);
+							_this.POP.hide(); // hide only if logged in and insertable.
 						}
-						_this.POP.hide();
+						else {
+							alertify.error("Not logged in! Please log in to continue.");
+							auth.login_loop();
+						}
 					});
 				}
 			},

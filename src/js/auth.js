@@ -11,6 +11,11 @@ class Authentication {
 		instance = this;
 		this.TOKEN = this.get_token();
 		this.USER = null;
+		this.awaiting_login = false;
+
+		document.getElementById("loginsubmit").addEventListener("click", function() {
+			this.login();
+		});
 
 		return instance;
 	}
@@ -52,11 +57,30 @@ class Authentication {
 		}
 	}
 
-	login(uname, pass) {
+	cancelLogin() {
+		document.getElementById("logindialogue").firstElementChild.reset();
+		document.getElementById("logindialogue").style["display"] = "none";
+		this.awaiting_login = false;
+	}
+
+	login() {
+		var loginform = document.getElementById("logindialogue").firstElementChild;
+		var uname = loginform.elements.uname.value;
+		var pword = loginform.elements.pword.value;
+
+		if (pword == "" || uname == "") {
+			alertify.error("Either username or password is missing.");
+			return null;
+		}
+		document.getElementById("logindialogue").style["display"] = "none";
+		loginform.reset();
+		this.awaiting_login = false;
+
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/login.json", false);
 		var token = this.get_token();
 		if (token == null) {
+			alertify.error("Could not establish a connection.");
 			return null;
 		}
 		xhttp.setRequestHeader("X-CSRF-Token", token);
@@ -72,21 +96,17 @@ class Authentication {
 		}
 	}
 
-	login_loop(force_relog = false) {
+	async login_loop(force_relog = false) {
 		if (this.USER && this.USER.uid != 0 && !force_relog) return this.USER;
 
-		var uname = "";
-		while (uname == ""){
-			uname = prompt("Username:");
-		}
-		if (uname == null) return null;
-		var pass = "";
-		while (pass == "") {
-			pass = prompt("Password:");
-		}
-		if (pass == null) return null;
+		document.getElementById("logindialogue").style["display"] = "inline";
+		this.awaiting_login = true;
 
-		return this.login(uname, pass);
+		while (this.awaiting_login) {
+			await (new Promise(resolve => setTimeout(resolve, 1000)));
+		}
+
+		return this.USER;
 	}
 
 }
