@@ -225,19 +225,20 @@ h4 {
 	display: -ms-grid;
 	display: grid;
 	margin: 0;
-	position: fixed; /* dont change it, vh does not work on mobiles with bottom footer */
+	/* position: fixed;  /*dont change it, vh does not work on mobiles with bottom footer 
 	/* padding-top: 5px; */
 	top: 0;
 	right: 0;
 	left: 0;
 	bottom: 5px;
-	height: auto;
+	/*height: auto;*/
 	overflow: hidden;
-	margin-top: 40px;
+	margin-top: 5px;
 	-ms-grid-rows: auto 1fr;
 	grid-template-rows: auto 1fr;
 	-ms-grid-columns: auto 1fr auto;
 	grid-template-columns: auto 1fr auto;
+	height: calc(100vh - 100px);
 
 	grid-template-areas:
 		"submenu submenu submenu"
