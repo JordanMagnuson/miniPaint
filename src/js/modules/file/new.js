@@ -4,6 +4,8 @@ import Base_gui_class from './../../core/base-gui.js';
 import Base_layers_class from './../../core/base-layers.js';
 import Helper_class from './../../libs/helpers.js';
 import Dialog_class from './../../libs/popup.js';
+import GUI_preview_class from "../../core/gui/gui-preview";
+
 
 /**
  * manages files / new
@@ -15,6 +17,8 @@ class File_new_class {
 	constructor() {
 		this.Base_gui = new Base_gui_class();
 		this.Base_layers = new Base_layers_class();
+		this.GUI_preview = new GUI_preview_class();
+
 		this.POP = new Dialog_class();
 		this.Helper = new Helper_class();
 	}
@@ -68,12 +72,18 @@ class File_new_class {
 			],
 			on_finish: function (params) {
 				_this.new_handler(params);
+		//		_this.GUI_preview.zoom_auto();
+
+
+
+
+
 			},
 		};
 		this.POP.show(settings);
 	}
 
-	new_handler(response) {
+	async new_handler(response) {
 		var width = parseInt(response.width);
 		var height = parseInt(response.height);
 		var resolution = response.resolution;
@@ -109,17 +119,12 @@ class File_new_class {
 			])
 		);
 
-		// Last resolution
-		var last_resolution = JSON.stringify([config.WIDTH, config.HEIGHT]);
-		this.Helper.setCookie('last_resolution', last_resolution);
 
-		// Save resolution
-		if (save_resolution) {
-			this.Helper.setCookie('save_resolution', 1);
-		}
-		else {
-			this.Helper.setCookie('save_resolution', 0);
-		}
+		//sleep, lets wait till DOM is finished
+		await new Promise(r => setTimeout(r, 10));
+
+		//fit to screen?
+		this.Base_gui.GUI_preview.zoom_auto(true);
 		// Save transparency
 		if (transparency) {
 			this.Helper.setCookie('transparency', 1);
@@ -127,6 +132,7 @@ class File_new_class {
 		else {
 			this.Helper.setCookie('transparency', 0);
 		}
+
 	}
 
 }

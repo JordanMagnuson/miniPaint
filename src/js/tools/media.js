@@ -36,14 +36,11 @@ class Media_class extends Base_tools_class {
 	 * @param {string} query
 	 * @param {array} data
 	 */
-	search(query = '', data = []) {
-		console.log("entering search functriuon with query of", query, data);
+	search(query = '', data = [], auto_search = 0) {
+	//	console.log("entering search functriuon with query of", query, data);
 
 		var _this = this;
 		var html = '';
-
-		var key = config.pixabay_key;
-		key = key.split("").reverse().join("");
 
 		if (data) {
 			for (var i in data) {
@@ -61,8 +58,7 @@ class Media_class extends Base_tools_class {
 		}
 
 		//auto search on click from GUI search bar
-		if(query != "" && data.length == 0) {
-//			console.log("auto search");
+		if(query != "" && data.length == 0 && auto_search == 1) {
 			var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
 			URL += "?search_page_id=browse_graphics&fields=title,ss_image_thumbnail_url,ss_image_url&key=" + query ;
 			$.getJSON(URL, function (data) {
@@ -102,49 +98,36 @@ class Media_class extends Base_tools_class {
 						};
 						var auth = new Authentication();
 						var user = auth.get_logged_user();
-						console.log("user:", user);
-
-						if (user){
-							if (auth.check_premium(user)) {
-								_this.File_open.file_open_url_handler(data);
-							} else {
-								console.log(config.usedAssets);
-								if (config.usedAssets < config.free_image_limit) {
-									config.usedAssets += 1;
+						if(user.uid == 0) {
+							auth.login_loop();
+						} else {
+							if (user){
+								if (auth.check_premium(user)) {
 									_this.File_open.file_open_url_handler(data);
 								} else {
-									auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
+									console.log(config.usedAssets);
+									if (config.usedAssets < config.free_image_limit) {
+										config.usedAssets += 1;
+										_this.File_open.file_open_url_handler(data);
+									} else {
+										auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
+									}
 								}
 							}
-
+							_this.POP.hide();
 						}
 
-						_this.POP.hide();
 					});
 				}
 			},
 			on_finish: function (params) {
-				if (params.query == '')
+				if (params.query == '') {
 					return;
-
-				if (_this.cache[params.query] != undefined) {
-					//using cache
-
-					setTimeout(function () {
-						//only call same function after all handlers finishes
-						var data = _this.cache[params.query];
-						if (parseInt(data.totalHits) == 0) {
-							alertify.error('Your search did not match any images.');
-						}
-						_this.search(params.query, data.hits);
-					}, 100);
 				}
-				else {
 					//query to service
-					var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
-					URL += "?key=" + params.query ;
+					var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
+					URL += "?search_page_id=browse_graphics&fields=title,ss_image_thumbnail_url,ss_image_url&key=" + params.query ;
 					$.getJSON(URL, function (data) {
-						_this.cache[params.query] = data;
 						if (parseInt(data.total) == 0) {
 							alertify.error('Your search did not match any images.');
 						}
@@ -154,13 +137,126 @@ class Media_class extends Base_tools_class {
 					.fail(function () {
 						alertify.error('Error connecting to service.');
 					});
-				}
 			},
 		};
-		console.log("about to log settings");
-		console.log(settings);
 		this.POP.show(settings);
 	}
+
+
+	search_bundles(query = '', data = [], auto_search = 0, type) {
+		console.log("entering search functriuon with query of", query, data);
+		var _this = this;
+		_this.type = type;
+		var html = '';
+		console.log("type is " + type);
+		if (data) {
+			for (var i in data) {
+				html += '<div class="item">';
+				html += '	<img class="displayBlock pointer" alt="" src="' + data[i].ss_image_thumbnail_url + '" data-url="' + data[i].ss_image_url + '" />';
+				html += '</div>';
+			}
+			//fix for last line
+			html += '<div class="item"></div>';
+			html += '<div class="item"></div>';
+			html += '<div class="item"></div>';
+			html += '<div class="item"></div>';
+
+		}
+
+		//auto search on click from GUI search bar
+		// if(query != "" && data.length == 0 && auto_search == 1) {
+		// 	var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
+		// 	URL += "?search_page_id=browse_graphics&fields=title,ss_image_thumbnail_url,ss_image_url&key=" + query ;
+		// 	$.getJSON(URL, function (data) {
+		// 		_this.cache[query] = data;
+		// 		if (parseInt(data.total) == 0) {
+		// 			alertify.error('Your search did not match any images.');
+		// 		}
+		// 		delete data.total;
+		// 		_this.search(query, data);
+		// 	})
+		// 	.fail(function () {
+		// 		alertify.error('Error connecting to service.');
+		// 	});
+		// 	return;
+		// }
+
+
+		var settings = {
+			title: 'Search ' + type,
+			className: 'wide',
+			params: [
+				{name: "query", title: "Keyword:", value: query, type: type},
+			],
+			on_load: function (params) {
+				var node = document.createElement("div");
+				node.classList.add('flex-container');
+				node.innerHTML = html;
+				document.querySelector('#popup #dialog_content').appendChild(node);
+				//events
+				var targets = document.querySelectorAll('#popup .item img');
+				for (var i = 0; i < targets.length; i++) {
+					targets[i].addEventListener('click', function (event) {
+						//we have click
+						var data = {
+							url: this.dataset.url,
+						};
+						var auth = new Authentication();
+						var user = auth.get_logged_user();
+						if(user.uid == 0) {
+							auth.login_loop();
+						} else {
+							if (user){
+								if (auth.check_premium(user)) {
+									_this.File_open.file_open_url_handler(data);
+								} else {
+									console.log(config.usedAssets);
+									if (config.usedAssets < config.free_image_limit) {
+										config.usedAssets += 1;
+										_this.File_open.file_open_url_handler(data);
+									} else {
+										auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
+									}
+								}
+							}
+							_this.POP.hide();
+						}
+
+					});
+				}
+			},
+			on_finish: function (params) {
+				if (params.query == '') {
+					return;
+				}
+					//query to service
+		//			console.log("type is " + type);
+
+					var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
+					if(type == "Layout Templates") {
+						URL += "?fields=title,ss_image_thumbnail_url,ss_image_url&im_field_tags:12009&key=" + params.query ;
+					} else if (type == "Quick Pages") {
+						URL += "?fields=title,ss_image_thumbnail_url,ss_image_url&im_field_tags:1157&key=" + params.query ;
+					}
+					$.getJSON(URL, function (data) {
+						if (parseInt(data.total) == 0) {
+							alertify.error('Your search did not match any images.');
+						}
+						delete data.total;
+						_this.search_bundles(params.query, data, 0, type);
+					})
+					.fail(function () {
+						alertify.error('Error connecting to service.');
+					});
+			},
+		};
+		this.POP.show(settings);
+	}
+
+
+
+
+
 }
 
 export default Media_class;

@@ -61,6 +61,8 @@ class Authentication {
 		document.getElementById("logindialogue").firstElementChild.reset();
 		document.getElementById("logindialogue").style["display"] = "none";
 		this.awaiting_login = false;
+		var blur = document.getElementById("bg_blur");
+		blur.style.visibility = "hidden";
 	}
 
 	login() {
@@ -100,14 +102,16 @@ class Authentication {
 
 	async login_loop(force_relog = false) {
 		if (this.USER && this.USER.uid != 0 && !force_relog) return this.USER;
-
+		var blur = document.getElementById("bg_blur");
+		blur.style.visibility = "visible";
 		document.getElementById("logindialogue").style["display"] = "inline";
+
 		this.awaiting_login = true;
 
 		while (this.awaiting_login) {
 			await (new Promise(resolve => setTimeout(resolve, 1000)));
 		}
-
+		blur.style.visibility = "hidden";
 		return this.USER;
 	}
 

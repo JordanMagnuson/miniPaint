@@ -30,21 +30,22 @@ class Help_hide_class {
 			if (key == "e" && (event.ctrlKey == true || event.metaKey)) {
 				var auth = new Authentication();
 				var user = auth.get_logged_user();
-				if (!user || (user.uid == 0)) user = auth.login_loop();
-				if(user) {
+
+				if (!user || (user.uid == 0)) {
+					user = auth.login_loop();
+					event.preventDefault();
+				} else {
 					var premium = auth.check_premium(user);
-					console.log(premium);
 					if(premium) {
 						this.toggle();
 						this.Base_gui.prepare_canvas();
-
+						event.preventDefault();
 					} else {
 						auth.prompt_upgrade("Advanced Mode");
+						event.preventDefault();
 					}
-
-					event.preventDefault();
 				}
-				event.preventDefault();
+
 			}
 		}, false);
 	}

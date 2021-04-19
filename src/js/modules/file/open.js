@@ -8,6 +8,7 @@ import Clipboard_class from './../../libs/clipboard.js';
 import alertify from './../../../../node_modules/alertifyjs/build/alertify.min.js';
 import EXIF from './../../../../node_modules/exif-js/exif.js';
 import GUI_tools_class from "../../core/gui/gui-tools";
+import GUI_preview_class from "../../core/gui/gui-preview";
 import Media_class from "../../tools/media";
 
 var PSD = require('psd.js');
@@ -33,6 +34,7 @@ class File_open_class {
 		this.Base_gui = new Base_gui_class();
 		this.Helper = new Helper_class();
 		this.GUI_tools = new GUI_tools_class();
+		this.GUI_preview = new GUI_preview_class();
 		this.Media = new Media_class();
 
 		//clipboard class
@@ -49,11 +51,9 @@ class File_open_class {
 		var _this = this;
 
 		window.ondrop = function (e) {
-			document.getElementById("loader").style.display = "block";
 			//drop
 			e.preventDefault();
 			_this.open_handler(e);
-			document.getElementById("loader").style.display = "none";
 		};
 		window.ondragover = function (e) {
 			e.preventDefault();
@@ -262,8 +262,7 @@ class File_open_class {
 		this.POP.show(settings);
 	}
 
-	open_handler(e) {
-		document.getElementById("loader").style.display = "block";
+	async open_handler(e) {
 		var _this = this;
 		var files = e.target.files;
 
@@ -298,11 +297,10 @@ class File_open_class {
 			FR.file = files[i];
 
 			if (f.name.match('.psd')) {
-				document.getElementById("loader").style.display = "block";
 				PSD.fromEvent(e).then(function (psd) {
 					_this.new_load_psd(psd);
 				});
-				document.getElementById("loader").style.display = "none";
+
 				return;
 			}
 
@@ -338,7 +336,6 @@ class File_open_class {
 			else
 				FR.readAsDataURL(f);
 		}
-		document.getElementById("loader").style.display = "none";
 	}
 
 	open_template_test(){
@@ -385,7 +382,7 @@ class File_open_class {
 	}
 
 	//handler for open url. Example url: http://i.imgur.com/ATda8Ae.jpg
-	file_open_url_handler(user_response) {
+	async file_open_url_handler(user_response) {
 		var _this = this;
 		var url = user_response.url;
 		if (url == '')
@@ -409,67 +406,50 @@ class File_open_class {
 			img.onload = function () {
 				config.need_render = true;
 			};
-			app.State.do_action(
-				new app.Actions.Bundle_action('open_file_url', 'Open File URL', [
-					new app.Actions.Insert_layer_action(new_layer),
-					new app.Actions.Autoresize_canvas_action(img.width, img.height, null, true, true)
-				])
-			);
+
+			if(config.quickpage_start == 1) {
+				app.State.do_action(
+					new app.Actions.Bundle_action('open_file_url', 'Open File URL', [
+						new app.Actions.Insert_layer_action(new_layer),
+						new app.Actions.Autoresize_canvas_action(img.width, img.height, null, true, true)
+					])
+				);
+			} else {
+				app.State.do_action(
+					new app.Actions.Bundle_action('open_file_url', 'Open File URL', [
+						new app.Actions.Insert_layer_action(new_layer),
+			//			new app.Actions.Autoresize_canvas_action(img.width, img.height, null, true, true)
+					])
+				);
+			}
+
+
+
+
 		};
 		img.onerror = function (ex) {
 			alertify.error('Sorry, image could not be loaded. Try copy image and paste it.');
 		};
 		img.src = url;
+
+		if(config.quickpage_start == 1 ) {
+			console.log("got a quick page gotta resize ");
+			await new Promise(r => setTimeout(r, 10));
+			this.GUI_preview.zoom_auto();
+			app.State.do_action(
+					new app.Actions.Update_config_action({
+						quickpage_start: 0
+					})
+			);
+		}
+
 	}
 
 
 
-	// load_psd(psd) {
-	//
-	// 	var children = psd.tree().children();
-	// 	var doc = psd.tree().export().document;
-	// 	var max_id_order = 0;
-	//
-	// 	config.ZOOM = 1;
-	// 	config.WIDTH = doc.width;
-	// 	config.HEIGHT = doc.height;
-	// 	this.Base_layers.reset_layers();
-	// 	this.Base_gui.prepare_canvas();
-	//
-	// 	for (var node = children.length - 1; node >= 0; node--) {
-	// 		var child = children[node];
-	// 		var value = {};
-	// 		var png = child.layer.image.toPng();
-	// 		var opacity = child.layer.opacity;
-	// 		value.type = 'image';
-	// 		value.name = child.name;
-	// 		value.id = node;
-	// 		value.height = child.layer.height;
-	// 		value.width = child.layer.width;
-	// 		value.x = child.layer.left;
-	// 		value.y = child.layer.top;
-	// 		value.data = png.src;
-	// 		value.opacity = (opacity * 100 / 255.0);
-	// 		value.order = children.length - node;
-	// 		console.log(value)
-	//
-	// 		app.State.do_action(
-	// 			new app.Actions.Bundle_action('open_image', 'Open Image', [
-	// 				new app.Actions.Insert_layer_action(value)
-	// 			])
-	// 		);
-	//
-	// 	}
-	//
-	// 	this.Base_layers.auto_increment = children.length + 1;
-	//
-	//
-	// }
-
 
 
 	async new_load_psd(psd) {
-		document.getElementById("loader").style.display = "block";
 		var children = psd.tree().children();
 		var doc = psd.tree().export().document;
 
@@ -479,7 +459,7 @@ class File_open_class {
 		actions.push(
 			new app.Actions.Prepare_canvas_action('undo'),
 			new app.Actions.Update_config_action({
-				ZOOM: 1,
+		//		ZOOM: 1,
 				WIDTH: doc.width,
 				HEIGHT: doc.height
 			}),
@@ -525,7 +505,11 @@ class File_open_class {
 		await app.State.do_action(
 			new app.Actions.Bundle_action('open_json_file', 'Open JSON File', actions)
 		);
-		document.getElementById("loader").style.display = "none";
+
+		await new Promise(r => setTimeout(r, 10));
+
+		this.GUI_preview.zoom_auto();
+
 	}
 
 
@@ -613,9 +597,10 @@ class File_open_class {
 		actions.push(
 			new app.Actions.Prepare_canvas_action('undo'),
 			new app.Actions.Update_config_action({
-				ZOOM: 1,
+	//			ZOOM: 1,
 				WIDTH: parseInt(json.info.width),
-				HEIGHT: parseInt(json.info.height)
+				HEIGHT: parseInt(json.info.height),
+				user_fonts: json.user_fonts || {}
 			}),
 			new app.Actions.Reset_layers_action(),
 			new app.Actions.Prepare_canvas_action('do'),
@@ -648,13 +633,20 @@ class File_open_class {
 				new app.Actions.Select_layer_action(json.info.layer_active, true)
 			);
 		}
+
 		actions.push(
 			new app.Actions.Set_object_property_action(this.Base_layers, 'auto_increment', max_id_order + 1)
 		);
 		await app.State.do_action(
 			new app.Actions.Bundle_action('open_json_file', 'Open JSON File', actions)
 		);
+
+		await new Promise(r => setTimeout(r, 10));
+
+		this.GUI_preview.zoom_auto();
+
 	}
+
 
 	/**
 	 * Returns an action that saves the exif data of the provided object to the current layer

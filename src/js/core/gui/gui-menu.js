@@ -3,6 +3,7 @@
  * author: Vilius L.
  */
 
+import app from './../../app.js';
 import config from './../../config.js';
 import menuDefinition from './../../config-menu.js';
 import Help_translate_class from './../../modules/help/translate.js';
@@ -54,27 +55,31 @@ class GUI_menu_class {
 			welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("template").addEventListener("click", function() {
-			console.log("time to start a template");
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
-			_this.FOC.open_file();
+			_this.MC.search_bundles('', [], 0, "Layout Templates");
 			blur.style.visibility = "hidden";
 			welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("quick_page").addEventListener("click", function() {
-			console.log("time to start a quick page");
 				var blur = document.getElementById("bg_blur");
 				var welcome_screen = document.getElementById("welcome_screen");
-				_this.FOC.open_file();
+				_this.MC.search_bundles('', [], 0, "Quick Pages");
+				app.State.do_action(
+						new app.Actions.Update_config_action({
+							quickpage_start: 1
+						})
+				);
 				blur.style.visibility = "hidden";
 				welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("upgrade_button").addEventListener("click", function() {
 			var blur = document.getElementById("bg_blur");
 			var upgrade_dialog = document.getElementById("upgrade_dialog");
-			blur.style.visibility = "hidden";
-			upgrade_dialog.style.visibility = "hidden";
-			window.location = "https://www.digitalscrapbook.com/user/login?destination=user/login%3Freturn%3D/login_success%26uv_login%3D1%26uv_size%3Dpopup%26uv_ssl%3D1";
+			// blur.style.visibility = "hidden";
+			// upgrade_dialog.style.visibility = "hidden";
+			window.open(
+						 config.upgrade_link, "_blank");
 		});
 		document.getElementById("cancel_upgrade").addEventListener("click", function() {
 			var blur = document.getElementById("bg_blur");
@@ -95,7 +100,14 @@ class GUI_menu_class {
 
 		document.getElementById("search_button").addEventListener("click", function() {
 			var query_string = document.getElementById("search_input").value;
-			_this.MC.search(query_string);
+
+			if(query_string) {
+				_this.MC.search(query_string, [], 1);
+			} else {
+				_this.MC.search();
+			}
+
+//			_this.MC.search(query_string);
 		});
 
 document.getElementById("search_input").addEventListener("keyup", function(event) {
