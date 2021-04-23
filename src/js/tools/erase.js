@@ -29,9 +29,9 @@ class Erase_class extends Base_tools_class {
 		var mouse = this.get_mouse_info(event);
 		var params = this.getParams();
 		if (params.circle == true)
-			this.show_mouse_cursor(mouse.x, mouse.y, params.size, 'circle');
+			this.show_mouse_cursor(mouse.x, mouse.y, 30, 'circle');
 		else
-			this.show_mouse_cursor(mouse.x, mouse.y, params.size, 'rect');
+			this.show_mouse_cursor(mouse.x, mouse.y, 30, 'rect');
 	}
 
 	on_params_update() {
@@ -82,7 +82,7 @@ class Erase_class extends Base_tools_class {
 		);
 
 		//do erase
-		this.erase_general(this.tmpCanvasCtx, 'click', mouse, params.size, params.strict, params.circle);
+		this.erase_general(this.tmpCanvasCtx, 'click', mouse, 30, params.strict, params.circle);
 
 		//register tmp canvas for faster redraw
 		config.layer.link_canvas = this.tmpCanvas;
@@ -106,7 +106,7 @@ class Erase_class extends Base_tools_class {
 		}
 
 		//do erase
-		this.erase_general(this.tmpCanvasCtx, 'move', mouse, params.size, params.strict, params.circle, is_touch);
+		this.erase_general(this.tmpCanvasCtx, 'move', mouse, 30, params.strict, params.circle, is_touch);
 
 		//draw draft preview
 		config.need_render = true;
