@@ -127,6 +127,72 @@ class Media_class extends Base_tools_class {
 			on_finish: function (params) {
 				if (params.query == '')
 					return;
+				}
+					//query to service
+					var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
+					URL += "?search_page_id=browse_graphics&fields=title,ss_image_thumbnail_url,ss_image_url&key=" + params.query ;
+					$.getJSON(URL, function (data) {
+						if (parseInt(data.total) == 0) {
+							alertify.error('Your search did not match any images.');
+						}
+						delete data.total;
+						_this.search(params.query, data);
+					})
+					.fail(function () {
+						alertify.error('Error connecting to service.');
+					});
+			},
+		};
+		this.POP.show(settings);
+	}
+
+
+	search_bundles(query = '', data = [], auto_search = 0, type) {
+		console.log("entering search functriuon with query of", query, data);
+		var _this = this;
+		_this.type = type;
+		var html = '';
+		console.log("type is " + type);
+		if (data) {
+			for (var i in data) {
+				html += '<div class="item">';
+				if(type == "Layout Templates") {
+					html += '	<img class="displayBlock pointer" alt="" src="' + data[i].fields.ss_image_thumbnail_url + '" data-url="' + data[i].fields.ss_psd_url + '" />';
+				} else {
+					html += '	<img class="displayBlock pointer" alt="" src="' + data[i].fields.ss_image_thumbnail_url + '" data-url="' + data[i].fields.ss_image_url + '" />';
+				}
+				html += '</div>';
+			}
+			//fix for last line
+			html += '<div class="item"></div>';
+			html += '<div class="item"></div>';
+			html += '<div class="item"></div>';
+			html += '<div class="item"></div>';
+
+		}
+
+		//auto search on click from GUI search bar
+		if(data.length == 0 && auto_search == 1) {
+			var URL;
+			if(type == "Layout Templates") {
+				URL = "https://www.digitalscrapbook.com/services/search/retreive.json?search_page_id=browse_graphics&filters=im_field_tags:12009,ss_psd_url:*";
+			} else if (type == "Quick Pages") {
+				URL = "https://www.digitalscrapbook.com/services/search/retreive.json?search_page_id=browse_graphics&filters=im_field_tags:1157";
+			}
+			console.log("gonna auto search with url " + URL);
+			$.getJSON(URL, function (data) {
+				_this.cache[query] = data;
+				if (data.length == 0) {
+					alertify.error('Your search did not match any images.');
+				}
+				delete data.total;
+				_this.search_bundles(query, data, 0, type);
+			})
+			.fail(function () {
+				alertify.error('Error connecting to service.');
+			});
+			return;
+		}
 
 				if (_this.cache[params.query] != undefined) {
 					//using cache
@@ -142,12 +208,21 @@ class Media_class extends Base_tools_class {
 				}
 				else {
 					//query to service
-					var URL = "https://www.pixelscrapper.com/services/search/retreive.json";
-					URL += "?key=" + params.query ;
+		//			console.log("type is " + type);
+
+					var URL = "https://www.digitalscrapbook.com/services/search/retreive.json";
+					if(type == "Layout Templates") {
+						URL = "https://www.digitalscrapbook.com/services/search/retreive.json?search_page_id=browse_graphics&filters=im_field_tags:12009,ss_psd_url:*&key=" + params.query ;
+					//	URL += "?search_page_id=browse_graphics&filters=im_field_tags:12009,ss_psd_url:*&key=" + params.query ;
+
+					} else if (type == "Quick Pages") {
+						URL = "https://www.digitalscrapbook.com/services/search/retreive.json?search_page_id=browse_graphics&filters=im_field_tags:1157&key=" + params.query ;
+					}
 					$.getJSON(URL, function (data) {
-						_this.cache[params.query] = data;
-						if (parseInt(data.total) == 0) {
-							alertify.error('Your search did not match any images.');
+						console.log("gonna log data");
+						console.log(data.length);
+						if (parseInt(data.total) == 0 || data.length == 0) {
+							alertify.error('Your search did not match any graphics.');
 						}
 						delete data.total;
 						_this.search(params.query, data);

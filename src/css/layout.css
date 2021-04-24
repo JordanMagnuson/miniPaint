@@ -78,7 +78,7 @@ h4 {
 
 .top_buttons{
 	margin: 3px;
-	width: 12%;
+	width: 8%;
 }
 #searchbar{
 	width: inherit;
@@ -86,13 +86,13 @@ h4 {
 	padding-bottom: 10px
 }
 #search_input{
-	width: 41%;
+	width: 40%;
 }
 #search_button{
 	width: 10%;
 }
 #projectbar_appName{
-	width: 10%;
+	width: 22%;
 }
 #bg_blur{
 	margin:0;
@@ -108,6 +108,7 @@ h4 {
 }
 
 @media screen and (max-width:700px){
+
 	#welcome_screen{
 		width: 500px;
 		height: 600px;
@@ -115,8 +116,49 @@ h4 {
 	h3 {
 		padding-top: 20px;
 	}
+	.top_buttons{
+		margin: 3px;
+		width: 8%;
+	}
+	#search_input{
+		width: 40%;
+	}
+	#search_button{
+		width: 10%;
+	}
+	#projectbar_appName{
+		display: none;
+	}
+
 }
 
+#loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position:fixed;
+	z-index: 200;
+	display: none;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 .wrapper{
 	display: -ms-grid;
@@ -765,7 +807,7 @@ canvas{
 .flex-container .item{
 	flex: auto;
 	margin: 2px 0;
-	width: 150px;
+	/* width: 150px; */
 }
 .flex-container .item:empty{
 	height: 0;

@@ -378,6 +378,8 @@ class File_open_class {
 		}
 	}
 
+
+
 	//handler for open url. Example url: http://i.imgur.com/ATda8Ae.jpg
 	file_open_url_handler(user_response) {
 		var _this = this;
@@ -386,6 +388,26 @@ class File_open_class {
 			return;
 
 		var layer_name = url.replace(/^.*[\\\/]/, '');
+
+		if(url.includes('.psd')) {
+			console.log("got a psd url here");
+			document.getElementById("loader").style.display = 'block';
+			alertify.success("Drag the file onto the canvas to begin!");
+			fetch(url).then(function(t) {
+					return t.blob().then((b)=>{
+							var a = document.createElement("a");
+							a.href = URL.createObjectURL(b);
+							a.setAttribute("download", layer_name);
+							a.click();
+					}
+					);
+			});
+			setTimeout(() => {
+				document.getElementById("loader").style.display = 'none';
+			}, 2000);
+			return;
+		}
+
 
 		console.log
 		var img = new Image();
@@ -403,12 +425,34 @@ class File_open_class {
 			img.onload = function () {
 				config.need_render = true;
 			};
-			app.State.do_action(
-				new app.Actions.Bundle_action('open_file_url', 'Open File URL', [
-					new app.Actions.Insert_layer_action(new_layer),
-					new app.Actions.Autoresize_canvas_action(img.width, img.height, null, true, true)
-				])
-			);
+
+			if(config.quickpage_start == 1) {
+				app.State.do_action(
+					new app.Actions.Bundle_action('open_file_url', 'Open File URL', [
+						new app.Actions.Reset_layers_action(),
+						new app.Actions.Insert_layer_action(new_layer),
+						new app.Actions.Autoresize_canvas_action(img.width, img.height, null, true, true)
+					])
+				);
+				app.State.do_action(
+						new app.Actions.Update_config_action({
+							quickpage_start: 0
+						})
+				);
+			} else {
+				app.State.do_action(
+					new app.Actions.Bundle_action('open_file_url', 'Open File URL', [
+				//		new app.Actions.Reset_layers_action(),
+						new app.Actions.Insert_layer_action(new_layer),
+				//		new app.Actions.Autoresize_canvas_action(img.width, img.height, null, true, true)
+					])
+				);
+			}
+
+
+
+
+
 		};
 		img.onerror = function (ex) {
 			alertify.error('Sorry, image could not be loaded. Try copy image and paste it.');
@@ -418,47 +462,6 @@ class File_open_class {
 
 
 
-	load_psd(psd) {
-
-		var children = psd.tree().children();
-		var doc = psd.tree().export().document;
-		var max_id_order = 0;
-
-		config.ZOOM = 1;
-		config.WIDTH = doc.width;
-		config.HEIGHT = doc.height;
-		this.Base_layers.reset_layers();
-		this.Base_gui.prepare_canvas();
-
-		for (var node = children.length - 1; node >= 0; node--) {
-			var child = children[node];
-			var value = {};
-			var png = child.layer.image.toPng();
-			var opacity = child.layer.opacity;
-			value.type = 'image';
-			value.name = child.name;
-			value.id = node;
-			value.height = child.layer.height;
-			value.width = child.layer.width;
-			value.x = child.layer.left;
-			value.y = child.layer.top;
-			value.data = png.src;
-			value.opacity = (opacity * 100 / 255.0);
-			value.order = children.length - node;
-			console.log(value)
-
-			app.State.do_action(
-				new app.Actions.Bundle_action('open_image', 'Open Image', [
-					new app.Actions.Insert_layer_action(value)
-				])
-			);
-
-		}
-
-		this.Base_layers.auto_increment = children.length + 1;
-
-
-	}
 
 
 

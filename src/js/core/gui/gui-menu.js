@@ -55,21 +55,46 @@ class GUI_menu_class {
 			console.log("time to start a template");
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
-			_this.FOC.open_file();
-			blur.remove();
-			welcome_screen.remove();
+			_this.MC.search_bundles('', [], 1, "Layout Templates");
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("quick_page").addEventListener("click", function() {
 			console.log("time to start a quick page");
 				var blur = document.getElementById("bg_blur");
 				var welcome_screen = document.getElementById("welcome_screen");
-				_this.FOC.open_file();
-				blur.remove();
-				welcome_screen.remove();
+				_this.MC.search_bundles('', [], 1, "Quick Pages");
+				app.State.do_action(
+						new app.Actions.Update_config_action({
+							quickpage_start: 1
+						})
+				);
+				blur.style.visibility = "hidden";
+				welcome_screen.style.visibility = "hidden";
+		});
+		document.getElementById("upgrade_button").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var upgrade_dialog = document.getElementById("upgrade_dialog");
+			// blur.style.visibility = "hidden";
+			// upgrade_dialog.style.visibility = "hidden";
+			window.open(
+						 config.upgrade_link, "_blank");
+		});
+		document.getElementById("cancel_upgrade").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var upgrade_dialog = document.getElementById("upgrade_dialog");
+			blur.style.visibility = "hidden";
+			upgrade_dialog.style.visibility = "hidden";
 		});
 
 		document.getElementById("new_button").addEventListener("click", function() {
-			_this.FNC.new();
+			document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body> New Project </body> </div> <h3> </h3> <h4> </h4><body>Need help? Watch this <a href=""> five minute video </a> ' + config.tutorial_link +  ' on how to get started</body> ' ;
+
+			document.getElementById("welcome_screen").style.visibility = "visible";
+			var blur = document.getElementById("bg_blur");
+			blur.style.visibility = "visible";
+
+
 		});
 		document.getElementById("open_button").addEventListener("click", function() {
 			_this.FOC.open_file();
