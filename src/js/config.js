@@ -20,12 +20,16 @@ config.need_render = false;
 config.need_render_changed_params = false; // Set specifically when param change in layer details triggered render
 config.mouse = {};
 config.upgrade_cost = "$Dollars.cents";
-config.app_name = "App Name TBD";
+config.app_name = "Scrapbook Maker";
 config.free_image_limit = 5;
+config.upgrade_link = "https://www.digitalscrapbook.com/user/login?destination=user/login%3Freturn%3D/login_success%26uv_login%3D1%26uv_size%3Dpopup%26uv_ssl%3D1";
 config.tutorial_link = "link in config";
+config.quickpage_start = 0;
 config.swatches = {
 	default: [] // Only default used right now, object format for swatch swapping in future.
 };
+
+config.usedAssets = 0;
 
 //requires styles in reset.css
 config.themes = [

@@ -21,9 +21,9 @@ class Shadow_class extends Base_tools_class {
 	on_activate() {
 		var passed_params = {};
 		if (config.TOOL.name == "shadow_a") {
-			passed_params = {x:10, y:10, value: 5, color:"#000000"};
+			passed_params = {x:6, y:6, value: 15, color:"#6b6b6b"};
 		} else if (config.TOOL.name == "shadow_b") {
-			passed_params = {x:10, y:10, value: 5, color:"#00FF00"};
+			passed_params = {x:6, y:6, value: 4, color:"#bababa"};
 		}
 		
 		if (passed_params){

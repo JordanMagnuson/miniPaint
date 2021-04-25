@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="x-ua-compatible" content="IE=edge" />
-	<title>miniPaint - image editor</title>
+	<title>Scrapbook Maker</title>
 	<meta name="description" content="miniPaint is free online image editor using HTML5. Edit, adjust your images, add effects online in your browser, without installing anything..." />
 	<meta name="keywords" content="photo, image, picture, transparent, layers, free, edit, html5, canvas, javascript, online, photoshop, gimp, effects, sharpen, blur, magic eraser tool, clone tool, rotate, resize, photoshop online, online tools, tilt shift, sprites, keypoints" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0" />
@@ -34,30 +34,72 @@
 	<div id="loader"></div>
 
 
+	<div id="upgrade_dialog">
+		<div class="ws_top">
+		<body>Upgrade To Premium</body>
+		</div>
+		<div class="upgrade_body">
+			<div id="upgrade_reason">
+				<h3>Action requires Appname Premium </h3>
+			</div>
+			<h4>Go premium now to access</h4>
+			<ul>
+			  <li> <strong> Premium Features: </strong> More features and more control, with an advanced menu bar and tools for power users, and advanced tutorials to teach you the ropes.</li>
+			  <li><strong> 150,000+ Premium Graphics: </strong> including papers, elements, templates, and more.</li>
+			  <li><strong> 10,000+ Premium Layout Templates: </strong></li>
+				<li><strong> 5,000+ Premium Quick Pages: </strong></li>
+				<li><strong> 20,000+ Premium Kits: </strong>Themed kits for every occasion containing coordinating papers and elements</li>
+			</ul>
+		</div>
+		<div class="upgrade_footer">
+				<button type="button" id="upgrade_button" >Upgrade!</button>
+				<body>Try it now for only $1! </body>
+		</div>
+		<div class="upgrade_cancel">
+				<button type="button" id="cancel_upgrade" >cancel</button>
+		</div>
+	</div>
+
 	<div id="welcome_screen">
 		<div class="ws_body" id="ws_body">
 
 		</div>
-		<div class="ws_buttons">
+		<div class="ws_buttons" id="ws_buttons">
 			<button type="button" id="blank_project" >Blank Project</button>
 			<button type="button" id="template" >Start from Template</button>
 			<button type="button" id="quick_page" >Start from Quick Page</button>
 		</div>
-		<div class="ws_footer">
+		<div class="ws_footer" id ="ws_footer">
 		<body>Already working on something?
 			<a href="">Open Project</a>
 		 </body>
 		</div>
 	</div>
 
-	<div id ="projectbar">
-		<a class="logo" href="#" id="projectbar_appName"></a>
-		<button type="button" id="new_button" class="top_buttons" >New Project</button>
-		<button type="button" id="open_button" class="top_buttons" >Open Project</button>
-		<button type="button" id="save_button" class="top_buttons" >Save Project</button>
-		<input type="text"id="search_input" placeholder="Pixel Scrapper Image Search..">
-		<button type="submit" id="search_button" >Search</i></button>
+	<div id="logindialogue">
+		<form>
+			<label for="uname">User Name:</label><br>
+			<input type="text" id="uname" name="uname"><br>
+			<label for="pword">Password:</label><br>
+			<input type="password" id="pword" name="pword"><br><br>
+			<a>Create an Account</a><br>
+			<button type="button" class="loginbuttons" id="loginsubmit">Submit</button>
+			<button type="button" class="loginbuttons" id="logincancel">Cancel</button>
+		</form>
 	</div>
+
+	<div id ="projectbar">
+
+			<a class="logo" href="#" id="projectbar_appName">App Name</a>
+			<button type="button" id="new_button" class="top_buttons" >New Project</button>
+			<button type="button" id="open_button" class="top_buttons" >Open Project</button>
+			<button type="button" id="save_button" class="top_buttons" >Save Project</button>
+			<input type="text"id="search_input" placeholder="Digitalscrapbook Image Search..">
+			<button type="submit" id="search_button" >Search</i></button>
+
+	</div>
+
+
 
 	<div class="wrapper">
 

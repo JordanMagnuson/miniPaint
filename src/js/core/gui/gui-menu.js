@@ -3,6 +3,7 @@
  * author: Vilius L.
  */
 
+import app from './../../app.js';
 import config from './../../config.js';
 import menuDefinition from './../../config-menu.js';
 import Help_translate_class from './../../modules/help/translate.js';
@@ -39,7 +40,9 @@ class GUI_menu_class {
 
 	render_main() {
 
-		document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body>Welcome to ' + config.app_name +  ' </body> </div> <h3>Welcome to ' + config.app_name +  '!</h3> <h4>The fast, easy and free tool for making digital scrapbooking layouts</h4><body>Need help? Watch this five minute video ' + config.tutorial_link +  ' on how to get started</body> ' ;
+		document.getElementById("welcome_screen").style.visibility = "visible";
+
+		document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body>Welcome to ' + config.app_name +  ' </body> </div> <h3>Welcome to ' + config.app_name +  '!</h3> <h4>The fast, easy and free tool for making digital scrapbooking layouts</h4><body>Need help? Watch this <a href=""> five minute video </a> ' + config.tutorial_link +  ' on how to get started</body> ' ;
 		document.getElementById("projectbar_appName").innerHTML = config.app_name;
 
 		var _this = this;
@@ -48,11 +51,10 @@ class GUI_menu_class {
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
 			_this.FNC.new();
-			blur.remove();
-			welcome_screen.remove();
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("template").addEventListener("click", function() {
-			console.log("time to start a template");
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
 			_this.MC.search_bundles('', [], 1, "Layout Templates");
@@ -60,7 +62,6 @@ class GUI_menu_class {
 			welcome_screen.style.visibility = "hidden";
 		});
 		document.getElementById("quick_page").addEventListener("click", function() {
-			console.log("time to start a quick page");
 				var blur = document.getElementById("bg_blur");
 				var welcome_screen = document.getElementById("welcome_screen");
 				_this.MC.search_bundles('', [], 1, "Quick Pages");
@@ -105,7 +106,14 @@ class GUI_menu_class {
 
 		document.getElementById("search_button").addEventListener("click", function() {
 			var query_string = document.getElementById("search_input").value;
-			_this.MC.search(query_string);
+
+			if(query_string) {
+				_this.MC.search(query_string, [], 1);
+			} else {
+				_this.MC.search();
+			}
+
+//			_this.MC.search(query_string);
 		});
 
 document.getElementById("search_input").addEventListener("keyup", function(event) {

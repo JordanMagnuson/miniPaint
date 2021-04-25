@@ -85,9 +85,6 @@ export class Insert_layer_action extends Base_action {
 		// 		// }
 		// 	}
 
-	//			this.delete_layer_action = new app.Actions.Delete_layer_action(config.layer.id, true);
-	//			await this.delete_layer_action.do();
-	//		}
 
 			if (layer.link == null) {
 				if (typeof layer.data == 'object') {

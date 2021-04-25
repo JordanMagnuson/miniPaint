@@ -19,7 +19,7 @@ class Borders_class extends Base_tools_class {
 
 	render(ctx, layer) {
 		var params = layer.params;
-		var size = params.size;
+		var size = 5;
 
 		var x = layer.x;
 		var y = layer.y;
@@ -63,12 +63,12 @@ class Borders_class extends Base_tools_class {
 			name: 'Borders',
 			type: 'borders',
 			render_function: ['borders', 'render'],
-			params: {size: params.size, shadow: params.shadow},
+			params: {size: 5, shadow: params.shadow},
 			color: params.color,
-			x: config.layer ? config.layer.x - params.size / 2 : 0,
-			y: config.layer ? config.layer.y - params.size / 2 : 0,
-			width: config.layer ? config.layer.width + params.size : config.WIDTH,
-			height: config.layer ? config.layer.height + params.size  : config.HEIGHT,
+			x: config.layer ? config.layer.x - 5 / 2 : 0,
+			y: config.layer ? config.layer.y - 5 / 2 : 0,
+			width: config.layer ? config.layer.width + 5 : config.WIDTH,
+			height: config.layer ? config.layer.height + 5  : config.HEIGHT,
 			is_vector: true,
 		};
 		app.State.do_action(
@@ -80,7 +80,7 @@ class Borders_class extends Base_tools_class {
 
 	on_activate() {
 		var params = this.getParams();
-		this.add_borders({size:params.size, shadow:false, color:config.COLOR});
+		this.add_borders({size:5, shadow:false, color:config.COLOR});
 	}
 
 }

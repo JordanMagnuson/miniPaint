@@ -591,8 +591,8 @@ class File_save_class {
 		var user = auth.get_logged_user();
 		var images_used = 0;
 		if(user) {
-			console.log("upon tryint to save, user has used " + user.imagesUsed);
-			images_used = user.imagesUsed;
+			console.log("upon tryint to save, user has used " + config.usedAssets);
+			images_used = config.usedAssets;
 		}
 
 		//data

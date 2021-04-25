@@ -1,4 +1,7 @@
+import alertify from './../../node_modules/alertifyjs/build/alertify.min.js'
+
 var instance = null;
+import config from './config.js';
 
 class Authentication {
 
@@ -8,7 +11,11 @@ class Authentication {
 		}
 		instance = this;
 		this.TOKEN = this.get_token();
-		this.USER = null;
+		this.USER = this.get_logged_user();
+		this.awaiting_login = false;
+
+		document.getElementById("loginsubmit").addEventListener("click", this.login);
+		document.getElementById("logincancel").addEventListener("click", this.cancelLogin);
 
 		return instance;
 	}
@@ -23,6 +30,7 @@ class Authentication {
 			return this.TOKEN;
 		} else {
 			console.error("Error getting token.");
+			alertify.error("Error getting token.");
 			return null;
 		}
 	}
@@ -44,45 +52,67 @@ class Authentication {
 			return this.USER;
 		} else {
 			console.error("Error getting current user.");
+			alertify.error("Error getting current user.");
 			return null;
 		}
 	}
 
-	login(uname, pass) {
+	cancelLogin() {
+		document.getElementById("logindialogue").firstElementChild.reset();
+		document.getElementById("logindialogue").style["display"] = "none";
+		this.awaiting_login = false;
+		var blur = document.getElementById("bg_blur");
+		blur.style.visibility = "hidden";
+	}
+
+	login() {
+		var _this = new Authentication();
+
+		var loginform = document.getElementById("logindialogue").firstElementChild;
+		var uname = loginform.elements.uname.value;
+		var pword = loginform.elements.pword.value;
+
+		if (pword == "" || uname == "") {
+			alertify.error("Either username or password is missing.");
+			return null;
+		}
+		document.getElementById("logindialogue").style["display"] = "none";
+		loginform.reset();
+		_this.awaiting_login = false;
+
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/login.json", false);
-		var token = this.get_token();
-		if (token == null) {
+		console.log(_this);
+		if (_this.TOKEN == null) {
+			alertify.error("Could not establish a connection.");
 			return null;
 		}
-		xhttp.setRequestHeader("X-CSRF-Token", token);
+		xhttp.setRequestHeader("X-CSRF-Token", _this.TOKEN);
 		xhttp.setRequestHeader("Content-Type", "application/json");
-		xhttp.send('{"username":"'+uname+'", "password":"'+pass+'"}');
+		xhttp.send('{"username":"'+uname+'", "password":"'+pword+'"}');
 		if (xhttp.status == 200) {
-			this.USER = JSON.parse(xhttp.response).user;
-			this.USER.imagesUsed = 0;
-			return this.USER;
+			_this.USER = JSON.parse(xhttp.response).user;
+			return _this.USER;
 		} else {
 			console.error("Error logging in.");
+			alertify.error("Error logging in.");
 			return null;
 		}
 	}
 
-	login_loop(force_relog = false) {
+	async login_loop(force_relog = false) {
 		if (this.USER && this.USER.uid != 0 && !force_relog) return this.USER;
+		var blur = document.getElementById("bg_blur");
+		blur.style.visibility = "visible";
+		document.getElementById("logindialogue").style["display"] = "inline";
 
-		var uname = "";
-		while (uname == ""){
-			uname = prompt("Username:");
-		}
-		if (uname == null) return null;
-		var pass = "";
-		while (pass == "") {
-			pass = prompt("Password:");
-		}
-		if (pass == null) return null;
+		this.awaiting_login = true;
 
-		return this.login(uname, pass);
+		while (this.awaiting_login) {
+			await (new Promise(resolve => setTimeout(resolve, 1000)));
+		}
+		blur.style.visibility = "hidden";
+		return this.USER;
 	}
 
 	check_premium(user) {
@@ -94,11 +124,15 @@ class Authentication {
 				console.log("user has role " + user.roles[elem]);
 				premium = true;
 			}
-		} 
+		}
 		return premium;
 	}
 
-	prompt_upgrade() {
+	prompt_upgrade(reason) {
+		document.getElementById("upgrade_dialog").style.visibility = "visible";
+		var blur = document.getElementById("bg_blur").style.visibility = "visible";
+		document.getElementById("upgrade_reason").innerHTML = "<h3>" + reason + " requires " + config.app_name + " Premium</h3>";
+
 
 	}
 
