@@ -11,7 +11,7 @@ class Authentication {
 		}
 		instance = this;
 		this.TOKEN = this.get_token();
-		this.USER = this.get_logged_user();
+		this.USER = this.get_logged_user(true);
 		this.awaiting_login = false;
 
 		document.getElementById("loginsubmit").addEventListener("click", this.login);
@@ -58,7 +58,7 @@ class Authentication {
 	}
 
 	cancelLogin() {
-		document.getElementById("logindialogue").firstElementChild.reset();
+		document.getElementById("logindialogue").children[3].reset();
 		document.getElementById("logindialogue").style["display"] = "none";
 		this.awaiting_login = false;
 		var blur = document.getElementById("bg_blur");
@@ -78,7 +78,6 @@ class Authentication {
 		}
 		document.getElementById("logindialogue").style["display"] = "none";
 		loginform.reset();
-		_this.awaiting_login = false;
 
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/login.json", false);
@@ -92,6 +91,8 @@ class Authentication {
 		xhttp.send('{"username":"'+uname+'", "password":"'+pword+'"}');
 		if (xhttp.status == 200) {
 			_this.USER = JSON.parse(xhttp.response).user;
+			_this.awaiting_login = false;
+			alertify.success("Login Successful.");
 			return _this.USER;
 		} else {
 			console.error("Error logging in.");

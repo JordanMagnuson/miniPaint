@@ -117,7 +117,7 @@ margin-bottom: 10px;
 #logindialogue {
 	display: none;
 	text-align: center;
-	font-size: 110%;
+	font-size: 130%;
     color: black;
     background-color: grey;
 	position: absolute;
@@ -132,6 +132,28 @@ margin-bottom: 10px;
 	padding: 40px;
 	/*padding-top: 34px;*/
 	transform: translate(-50%, -50%);
+}
+
+#logindialogue > p {
+	text-align: left;
+}
+
+#logindialogue button {
+	background-color: #aaaaaa;
+}
+
+#logindialogue button:hover {
+	background-color: #a0a0a0;
+}
+
+#logindialogue input {
+	background: var(--input-background-color);
+	border: 1px solid var(--input-border-color);
+	border-radius: var(--input-border-radius);
+	color: var(--input-text-color);
+	padding: 3px 5px;
+	font-size: 13px;
+	letter-spacing: .12ch;
 }
 
 h3 {
