@@ -68,7 +68,7 @@ class Authentication {
 	login() {
 		var _this = new Authentication();
 
-		var loginform = document.getElementById("logindialogue").firstElementChild;
+		var loginform = document.getElementById("logindialogue").children[3];
 		var uname = loginform.elements.uname.value;
 		var pword = loginform.elements.pword.value;
 
