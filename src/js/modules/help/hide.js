@@ -27,7 +27,7 @@ class Help_hide_class {
 			if (this.Helper.is_input(event.target))
 				return;
 
-			if (key == "e" && (event.ctrlKey == true || event.metaKey)) {
+			if (key == "q" && (event.ctrlKey == true || event.metaKey)) {
 				var auth = new Authentication();
 				var user = auth.get_logged_user();
 

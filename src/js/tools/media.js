@@ -5,6 +5,9 @@ import Dialog_class from './../libs/popup.js';
 import alertify from './../../../node_modules/alertifyjs/build/alertify.min.js';
 import Authentication from './../auth.js';
 
+var Cookies = require('js-cookie');
+
+
 
 class Media_class extends Base_tools_class {
 
@@ -105,13 +108,21 @@ class Media_class extends Base_tools_class {
 								if (auth.check_premium(user)) {
 									_this.File_open.file_open_url_handler(data);
 								} else {
-									console.log(config.usedAssets);
-									if (config.usedAssets < config.free_image_limit) {
-										config.usedAssets += 1;
-										_this.File_open.file_open_url_handler(data);
-									} else {
-										auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
+
+									var used = Cookies.get('images');
+									if (!used) {
+										used = 0;
 									}
+
+									if(used > 4) {
+										auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
+									} else {
+										used = parseInt(used) + 1;
+
+										Cookies.set('images', used, { expires: 0.5, path: '' });
+										_this.File_open.file_open_url_handler(data);
+									}
+
 								}
 							}
 							_this.POP.hide();
@@ -220,12 +231,12 @@ class Media_class extends Base_tools_class {
 								if (auth.check_premium(user)) {
 									_this.File_open.file_open_url_handler(data);
 								} else {
-									console.log(config.usedAssets);
-									if (config.usedAssets < config.free_image_limit) {
-										config.usedAssets += 1;
-										_this.File_open.file_open_url_handler(data);
+									var used = Cookies.get(type);
+									if(used) {
+										auth.prompt_upgrade("Using multiple " + type + " a day");
 									} else {
-										auth.prompt_upgrade("Using more than " + config.free_image_limit + " images");
+										Cookies.set(type, '1', { expires: 0.5, path: '' });
+										_this.File_open.file_open_url_handler(data);
 									}
 								}
 							}
