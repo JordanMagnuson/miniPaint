@@ -35,16 +35,16 @@ class File_save_class {
 
 		//save types config
 		this.SAVE_TYPES = {
+			JSON: "Full layers data",
 			PNG: "Portable Network Graphics",
 			JPG: "JPG/JPEG Format",
 			//AVIF: "AV1 Image File Format", //just uncomment it in future to make it work
-			JSON: "Full layers data",
-			WEBP: "Weppy File Format",
-			GIF: "Graphics Interchange Format",
-			BMP: "Windows Bitmap",
+			// WEBP: "Weppy File Format",
+			// GIF: "Graphics Interchange Format",
+			// BMP: "Windows Bitmap",
 		};
 
-		this.default_extension = 'PNG';
+		this.default_extension = 'JSON';
 	}
 
 	set_events() {
