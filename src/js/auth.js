@@ -17,6 +17,12 @@ class Authentication {
 		document.getElementById("loginsubmit").addEventListener("click", this.login);
 		document.getElementById("logincancel").addEventListener("click", this.cancelLogin);
 
+		document.getElementById("pword").addEventListener("keyup", function(event) {
+			if (event.keyCode == 13) {
+				document.getElementById("loginsubmit").click();
+			}
+		});
+
 		return instance;
 	}
 
