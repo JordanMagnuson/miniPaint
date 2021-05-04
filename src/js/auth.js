@@ -44,8 +44,8 @@ class Authentication {
 		if (token == null) {
 			return 0;
 		}
-		// xhttp.setRequestHeader("X-CSRF-Token", token);
-		// xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("X-CSRF-Token", token);
+		xhttp.setRequestHeader("Content-Type", "application/json");
 		xhttp.send();
 		if (xhttp.status == 200) {
 			this.USER = JSON.parse(xhttp.response).user;
