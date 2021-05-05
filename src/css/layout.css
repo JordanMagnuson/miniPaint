@@ -306,7 +306,7 @@ h4 {
 	bottom: 5px;
 	/*height: auto;*/
 	overflow: hidden;
-	margin-top: 5px;
+	margin-top: 0px;
 	-ms-grid-rows: auto 1fr;
 	grid-template-rows: auto 1fr;
 	-ms-grid-columns: auto 1fr auto;
@@ -537,7 +537,7 @@ body .sp-preview{
 	background-color: var(--section-background-color);
 	padding: 0 5px 5px 0;
 	margin-right: 5px;
-	margin-top: 0px;
+	margin-top: 5px;
 	margin-left: 5px;
 	overflow: hidden;
 	align-self: start;
@@ -637,6 +637,7 @@ body .sp-preview{
 	overflow-x: hidden;
 	overflow-y: scroll;
 	margin: 0 5px;
+	margin-top: 5px;
 	width: 200px;
 }
 .sidebar_right.active{
@@ -859,6 +860,7 @@ body .sp-preview{
 /* ========== content ======================================================= */
 
 .main_wrapper{
+	margin-top: 5px;
 	-ms-grid-row: 2;
 	-ms-grid-column: 2;
 	grid-area: main;

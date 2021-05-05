@@ -58,10 +58,10 @@ class Help_hide_class {
 			this.GUI_tools.render_main_tools();
 
 			var projectbar = document.getElementById("projectbar");
-			projectbar.style["padding-top"] = "45px";
+			projectbar.style["padding-top"] = "30px";
 
 			this.target.style['display'] = 'inline';
-			this.wrapper.style['top'] = '45px';
+			this.wrapper.style['top'] = '30px';
 
 			var main_menu = document.getElementById("main_menu");
 			main_menu.style["top"] = "0px";
