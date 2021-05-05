@@ -58,7 +58,7 @@ class Authentication {
 	}
 
 	cancelLogin() {
-		document.getElementById("logindialogue").children[3].reset();
+		document.getElementById("loginform").reset();
 		document.getElementById("logindialogue").style["display"] = "none";
 		this.awaiting_login = false;
 		var blur = document.getElementById("bg_blur");
@@ -68,7 +68,7 @@ class Authentication {
 	login() {
 		var _this = new Authentication();
 
-		var loginform = document.getElementById("logindialogue").children[3];
+		var loginform = document.getElementById("loginform");
 		var uname = loginform.elements.uname.value;
 		var pword = loginform.elements.pword.value;
 
