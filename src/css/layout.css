@@ -205,6 +205,24 @@ h4 {
 	z-index: 112;
 }
 
+#media {
+	display: none;
+}
+
+@media screen and (max-width:1175px) {
+	#search_input {
+		display: none;
+	}
+
+	#search_button {
+		display: none;
+	}
+
+	#media {
+		display: block;
+	}
+}
+
 @media screen and (max-width:700px){
 
 	#welcome_screen{

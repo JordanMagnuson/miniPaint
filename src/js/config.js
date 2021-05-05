@@ -184,7 +184,7 @@ config.TOOLS = [
 		name: 'undo',
 		title: 'Undo',
 		on_activate: 'on_activate',
-  },
+  	},
 //   {
 // 		name: 'bulge_pinch',
 // 		title: 'Bulge/Pinch Tool',
@@ -198,7 +198,7 @@ config.TOOLS = [
 		name: 'redo',
 		title: 'Redo',
 		on_activate: 'on_activate',
-	}
+	},
 	// {
 	// 	name: 'brush',
 	// 	title: 'Brush',
@@ -271,14 +271,14 @@ config.TOOLS = [
 	// 		circle: false,
 	// 	},
 	// },
-	// {
-	// 	name: 'media',
-	// 	title: 'Search Images',
-	// 	on_activate: 'on_activate',
-	// 	attributes: {
-	// 		size: 30,
-	// 	},
-	// },
+	{
+		name: 'media',
+		title: 'Search Images',
+		on_activate: 'on_activate',
+		attributes: {
+			size: 30,
+		}
+	}
 	// {
 	// 	name: 'gradient',
 	// 	title: 'Gradient',
@@ -476,7 +476,7 @@ config.TOOLS_BASE = [
 		name: 'redo',
 		title: 'Redo',
 		on_activate: 'on_activate',
-	}
+	},
 	// {
 	// 	name: 'brush',
 	// 	title: 'Brush',
@@ -549,14 +549,14 @@ config.TOOLS_BASE = [
 	// 		circle: false,
 	// 	},
 	// },
-	// {
-	// 	name: 'media',
-	// 	title: 'Search Images',
-	// 	on_activate: 'on_activate',
-	// 	attributes: {
-	// 		size: 30,
-	// 	},
-	// },
+	{
+		name: 'media',
+		title: 'Search Images',
+		on_activate: 'on_activate',
+		attributes: {
+			size: 30,
+		}
+	},
 	// {
 	// 	name: 'gradient',
 	// 	title: 'Gradient',
@@ -863,25 +863,17 @@ config.TOOLS_ADVANCED = [
 		title: 'Redo',
 		on_activate: 'on_activate',
 	},
+	{
+		name: 'media',
+		title: 'Search Images',
+		on_activate: 'on_activate',
+		attributes: {
+			size: 30,
+		}
+	}
 ];
 
 //link to active tool
 config.TOOL = config.TOOLS[0];
-
-// =======
-// 		name: 'animation',
-// 		on_activate: 'on_activate',
-// 		on_update: 'on_params_update',
-// 		on_leave: 'on_leave',
-// 		attributes: {
-// 			play: false,
-// 			delay: 400,
-// 		},
-// 	},
-// ];
-
-// //link to active tool
-// config.TOOL = config.TOOLS[2];
-// >>>>>>> master
 
 export default config;
