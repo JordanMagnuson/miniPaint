@@ -55,7 +55,9 @@ class Help_hide_class {
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
 
 			config.TOOLS = config.TOOLS_ADVANCED;
-			this.GUI_tools.render_main_tools();
+		//	this.GUI_tools.render_main_tools();
+			this.GUI_tools.render_tools();
+
 
 			var projectbar = document.getElementById("projectbar");
 			projectbar.style["padding-top"] = "30px";
@@ -77,7 +79,9 @@ class Help_hide_class {
 
 		} else {
 			config.TOOLS = config.TOOLS_BASE;
-			this.GUI_tools.render_main_tools();
+		//	this.GUI_tools.render_main_tools();
+			this.GUI_tools.render_tools();
+
 			this.target.style['display'] = 'none';
 			this.wrapper.style['top'] = '0px'
 
