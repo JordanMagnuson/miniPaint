@@ -17,6 +17,12 @@ class Authentication {
 		document.getElementById("loginsubmit").addEventListener("click", this.login);
 		document.getElementById("logincancel").addEventListener("click", this.cancelLogin);
 
+		document.getElementById("pword").addEventListener("keyup", function(event) {
+			if (event.keyCode == 13) {
+				document.getElementById("loginsubmit").click();
+			}
+		});
+
 		return instance;
 	}
 
@@ -44,8 +50,8 @@ class Authentication {
 		if (token == null) {
 			return 0;
 		}
-		// xhttp.setRequestHeader("X-CSRF-Token", token);
-		// xhttp.setRequestHeader("Content-Type", "application/json");
+		xhttp.setRequestHeader("X-CSRF-Token", token);
+		xhttp.setRequestHeader("Content-Type", "application/json");
 		xhttp.send();
 		if (xhttp.status == 200) {
 			this.USER = JSON.parse(xhttp.response).user;
