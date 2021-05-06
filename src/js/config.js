@@ -640,7 +640,6 @@ config.TOOLS_ADVANCED = [
 		name: 'select',
 		title: 'Select object tool',
 		attributes: {
-			no_show: true,
 			auto_select: true,
 		},
 	},
@@ -715,7 +714,6 @@ config.TOOLS_ADVANCED = [
 		title: 'Erase',
 		on_update: 'on_params_update',
 		attributes: {
-			no_show:true,
 			size:12
 		}
 	},
@@ -735,7 +733,6 @@ config.TOOLS_ADVANCED = [
 		on_activate: 'on_activate',
 		attributes: {
 			size: 12,
-			no_show: true,
 		},
 	},
   // {
