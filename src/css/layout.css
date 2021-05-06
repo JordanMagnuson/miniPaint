@@ -482,7 +482,6 @@ body .sp-preview{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-bottom: 5px;
 	background-color: rgba(255, 255, 255, 0.2);
 	background-color: var(--section-background-color);
 	overflow: hidden;
@@ -492,8 +491,8 @@ body .sp-preview{
 	display: flex;
 	flex-wrap: nowrap;
 	background-color: var(--area-background-color);
-	width: calc(100% - 125px);
-	margin-top: 5px;
+	width: 100%;
+	margin: 5px;
 	margin-bottom: 5px !important;
 	padding: 3px 10px 3px 10px;
 	border: 0;

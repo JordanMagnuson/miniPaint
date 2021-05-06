@@ -21,11 +21,11 @@ class Shadow_class extends Base_tools_class {
 	on_activate() {
 		var passed_params = {};
 		if (config.TOOL.name == "shadow_a") {
-			passed_params = {x:6, y:6, value: 15, color:"#6b6b6b"};
+			passed_params = {x:6, y:6, value: 15, color:"#000000"};
 		} else if (config.TOOL.name == "shadow_b") {
-			passed_params = {x:6, y:6, value: 4, color:"#bababa"};
+			passed_params = {x:6, y:6, value: 4, color:"#000000"};
 		}
-		
+
 		if (passed_params){
 			this.Base_layers.add_filter(null, 'drop-shadow', passed_params);
 		}
