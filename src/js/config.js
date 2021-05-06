@@ -29,6 +29,8 @@ config.swatches = {
 	default: [] // Only default used right now, object format for swatch swapping in future.
 };
 
+config.advanced = false;
+
 config.usedAssets = 0;
 
 //requires styles in reset.css

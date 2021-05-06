@@ -54,6 +54,7 @@ class Help_hide_class {
 
 		if (this.target.style['display'] == 'none' || (this.target.offsetHeight == 0 && this.target.offsetWidth == 0)) {
 
+			config.advanced = true;
 			config.TOOLS = config.TOOLS_ADVANCED;
 		//	this.GUI_tools.render_main_tools();
 			this.GUI_tools.render_tools();
@@ -78,6 +79,7 @@ class Help_hide_class {
 
 
 		} else {
+			config.advanced = false;
 			config.TOOLS = config.TOOLS_BASE;
 		//	this.GUI_tools.render_main_tools();
 			this.GUI_tools.render_tools();

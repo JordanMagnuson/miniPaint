@@ -164,7 +164,7 @@ class GUI_tools_class {
 
 		const attributes = this.action_data().attributes || {};
 
-		if (!('no_show' in attributes && attributes['no_show'] == true)) {
+		if (config.advaced || !('no_show' in attributes && attributes['no_show'] == true)) {
 			let itemDom;
 			let currentButtonGroup = null;
 			for (var k in attributes) {
@@ -383,7 +383,7 @@ class GUI_tools_class {
 			}
 		}
 
-		if (itemContainer.innerHTML == "" && !('no_show' in attributes && attributes['no_show'] == false)) {
+		if (!config.advanced && itemContainer.innerHTML == "" && !('no_show' in attributes && attributes['no_show'] == false)) {
 			var submenu = itemContainer.parentElement;
 			submenu.style['display'] = 'none';
 		} else {
