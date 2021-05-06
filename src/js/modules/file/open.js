@@ -393,7 +393,7 @@ class File_open_class {
 		var layer_name = url.replace(/^.*[\\\/]/, '');
 
 		if(url.includes('.psd')) {
-			console.log("got a psd url here");
+			// console.log("got a psd url here");
 			document.getElementById("loader").style.display = 'block';
 			alertify.success("Drag the file onto the canvas to begin!");
 			fetch(url).then(function(t) {
@@ -412,7 +412,7 @@ class File_open_class {
 		}
 
 
-		console.log
+		// console.log
 		var img = new Image();
 		img.crossOrigin = "Anonymous";
 		img.onload = function () {
@@ -462,7 +462,7 @@ class File_open_class {
 		img.src = url;
 
 		if(config.quickpage_start == 1 ) {
-			console.log("got a quick page gotta resize ");
+			// console.log("got a quick page gotta resize ");
 			await new Promise(r => setTimeout(r, 10));
 			this.GUI_preview.zoom_auto();
 			// app.State.do_action(
@@ -513,7 +513,7 @@ class File_open_class {
 			value.data = png.src;
 			value.opacity = (opacity * 100 / 255.0);
 			value.order = children.length - node;
-			console.log(value)
+			// console.log(value)
 
 
 			if(value.id > max_id_order)

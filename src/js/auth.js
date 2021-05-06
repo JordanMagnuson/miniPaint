@@ -82,14 +82,13 @@ class Authentication {
 			alertify.error("Either username or password is missing.");
 			return null;
 		}
-		document.getElementById("logindialogue").style["display"] = "none";
-		loginform.reset();
 
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "https://www.digitalscrapbook.com/services/auth/user/login.json", false);
-		console.log(_this);
 		if (_this.TOKEN == null) {
 			alertify.error("Could not establish a connection.");
+		loginform.reset();
+		document.getElementById("logindialogue").style["display"] = "none";
 			return null;
 		}
 		xhttp.setRequestHeader("X-CSRF-Token", _this.TOKEN);
@@ -97,6 +96,8 @@ class Authentication {
 		xhttp.send('{"username":"'+uname+'", "password":"'+pword+'"}');
 		if (xhttp.status == 200) {
 			_this.USER = JSON.parse(xhttp.response).user;
+			loginform.reset();
+			document.getElementById("logindialogue").style["display"] = "none";
 			_this.awaiting_login = false;
 			alertify.success("Login Successful.");
 			return _this.USER;
@@ -125,12 +126,12 @@ class Authentication {
 	}
 
 	check_premium(user) {
-		console.log(user.roles);
+		// console.log(user.roles);
 		var premium = false;
 		for (const elem in user.roles) {
 			//elem is the number, user.roles[elem] is the words with it
 			if(user.roles[elem] == "subscriber" || user.roles[elem] == "pu subscriber" || user.roles[elem] == "cu subscriber"     ) {
-				console.log("user has role " + user.roles[elem]);
+				// console.log("user has role " + user.roles[elem]);
 				premium = true;
 			}
 		}

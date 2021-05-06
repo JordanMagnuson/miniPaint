@@ -18,7 +18,7 @@ class Media_class extends Base_tools_class {
 		this.name = 'media';
 		this.cache = [];
 		this.auth = new Authentication();
-		console.log(this.auth);
+		// console.log(this.auth);
 	}
 
 	load() {
@@ -155,11 +155,11 @@ class Media_class extends Base_tools_class {
 
 
 	search_bundles(query = '', data = [], auto_search = 0, type) {
-		console.log("entering search functriuon with query of", query, data);
+		// console.log("entering search functriuon with query of", query, data);
 		var _this = this;
 		_this.type = type;
 		var html = '';
-		console.log("type is " + type);
+		// console.log("type is " + type);
 		if (data) {
 			for (var i in data) {
 				html += '<div class="item">';
@@ -186,7 +186,7 @@ class Media_class extends Base_tools_class {
 			} else if (type == "Quick Pages") {
 				URL = "https://www.digitalscrapbook.com/services/search/retreive.json?search_page_id=browse_graphics&filters=im_field_tags:1157";
 			}
-			console.log("gonna auto search with url " + URL);
+			// console.log("gonna auto search with url " + URL);
 			$.getJSON(URL, function (data) {
 				_this.cache[query] = data;
 				if (data.length == 0) {
@@ -262,8 +262,8 @@ class Media_class extends Base_tools_class {
 						URL = "https://www.digitalscrapbook.com/services/search/retreive.json?search_page_id=browse_graphics&filters=im_field_tags:1157&key=" + params.query ;
 					}
 					$.getJSON(URL, function (data) {
-						console.log("gonna log data");
-						console.log(data.length);
+						// console.log("gonna log data");
+						// console.log(data.length);
 						if (parseInt(data.total) == 0 || data.length == 0) {
 							alertify.error('Your search did not match any graphics.');
 						}
