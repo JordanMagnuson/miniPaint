@@ -107,11 +107,13 @@ class Authentication {
 		}
 	}
 
-	async login_loop(force_relog = false) {
+	async login_loop(force_relog = false, reason) {
 		if (this.USER && this.USER.uid != 0 && !force_relog) return this.USER;
 		var blur = document.getElementById("bg_blur");
 		blur.style.visibility = "visible";
 		document.getElementById("logindialogue").style["display"] = "inline";
+		document.getElementById("loginreason").innerText = reason + " requires an account.";
+
 
 		this.awaiting_login = true;
 
