@@ -102,7 +102,7 @@ class Media_class extends Base_tools_class {
 						var auth = new Authentication();
 						var user = auth.get_logged_user();
 						if(user.uid == 0) {
-							auth.login_loop();
+							auth.login_loop(false, "Using images from Digitalscrapbook.com");
 						} else {
 							if (user){
 								if (auth.check_premium(user)) {
@@ -225,7 +225,7 @@ class Media_class extends Base_tools_class {
 						var auth = new Authentication();
 						var user = auth.get_logged_user();
 						if(user.uid == 0) {
-							auth.login_loop();
+							auth.login_loop(false, "Using resources from Digitalscrapbook.com");
 						} else {
 							if (user){
 								if (auth.check_premium(user)) {

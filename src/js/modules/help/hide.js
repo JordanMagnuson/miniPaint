@@ -32,7 +32,7 @@ class Help_hide_class {
 				var user = auth.get_logged_user();
 
 				if (!user || (user.uid == 0)) {
-					user = auth.login_loop();
+					auth.login_loop(false, "Advanced Mode");
 					event.preventDefault();
 				} else {
 					var premium = auth.check_premium(user);
