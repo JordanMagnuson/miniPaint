@@ -3,13 +3,12 @@
 	position: absolute;
 	text-align: center;
 	font-size: 110%;
-    color: black;
-    background-color: white;
+    color: #373d3f;
+    background-color: #464d4f;
     top: 50%;
     left: 50%;
     height: 500px;
     width: 800px;
-    border: 5px;
     outline-style: solid;
 	outline-width: thin;
 	z-index: 113;
@@ -41,6 +40,7 @@
 	position: relative;
 	padding-top: 40px;
 	padding-bottom: 10px;
+	color: #f4f3f3;
 }
 
 .upgrade_body{
@@ -68,7 +68,14 @@ margin-bottom: 10px;
     margin: 0;
     padding-top: 10px;
     padding-bottom: 10px;
-	background-color: #ccc;
+	background-color: #373d3f;
+}
+
+.ws_body{
+	color: #f4f3f3;
+}
+.ws_footer{
+	color: #f4f3f3;
 }
 
 #upgrade_button{
@@ -93,7 +100,7 @@ margin-bottom: 10px;
 	padding: 40px;
 	padding-left: 20px;
 	padding-right: 20px;
-	background-color: #ccc;
+	background-color: #2f3739;
 	width: 180px;
 	margin: 15px;
 }
@@ -101,7 +108,7 @@ margin-bottom: 10px;
 	padding: 40px;
 	padding-left: 20px;
 	padding-right: 20px;
-	background-color: #ccc;
+	background-color: #2f3739;
 	width: 180px;
 	margin: 15px;
 }
@@ -109,7 +116,7 @@ margin-bottom: 10px;
 	padding: 40px;
 	padding-left: 20px;
 	padding-right: 20px;
-	background-color: #ccc;
+	background-color: #2f3739;
 	width: 180px;
 	margin: 15px;
 }
