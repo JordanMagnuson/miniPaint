@@ -54,6 +54,13 @@ class GUI_menu_class {
 			blur.style.visibility = "hidden";
 			welcome_screen.style.visibility = "hidden";
 		});
+		document.getElementById("ws_open").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var welcome_screen = document.getElementById("welcome_screen");
+			_this.FOC.open_file();
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
+		});
 		document.getElementById("template").addEventListener("click", function() {
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
