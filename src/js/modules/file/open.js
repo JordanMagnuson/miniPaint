@@ -297,10 +297,10 @@ class File_open_class {
 			FR.file = files[i];
 
 			if (f.name.match('.psd')) {
+				document.getElementById("loader").style.display = 'block';
 				PSD.fromEvent(e).then(function (psd) {
 					_this.new_load_psd(psd);
 				});
-
 				return;
 			}
 
@@ -390,6 +390,8 @@ class File_open_class {
 		if (url == '')
 			return;
 
+		document.getElementById("loader").style.display = 'block';
+
 		var layer_name = url.replace(/^.*[\\\/]/, '');
 
 		if(url.includes('.psd')) {
@@ -454,6 +456,7 @@ class File_open_class {
 
 
 
+		document.getElementById("loader").style.display = 'none';
 
 		};
 		img.onerror = function (ex) {
@@ -538,6 +541,7 @@ class File_open_class {
 		await new Promise(r => setTimeout(r, 10));
 
 		this.GUI_preview.zoom_auto();
+		document.getElementById("loader").style.display = 'none';
 
 	}
 
