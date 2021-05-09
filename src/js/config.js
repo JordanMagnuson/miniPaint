@@ -85,7 +85,7 @@ config.TOOLS = [
 		title: 'Select object tool',
 		attributes: {
 			no_show: true,
-			auto_select: true,
+			auto_select: false,
 		},
 	},
 	{
@@ -363,7 +363,7 @@ config.TOOLS_BASE = [
 		title: 'Select object tool',
 		attributes: {
 			no_show: true,
-			auto_select: true,
+			auto_select: false,
 		},
 	},
 	{
@@ -640,7 +640,7 @@ config.TOOLS_ADVANCED = [
 		name: 'select',
 		title: 'Select object tool',
 		attributes: {
-			auto_select: true,
+			auto_select: false,
 		},
 	},
 	{
