@@ -95,10 +95,19 @@ class GUI_menu_class {
 			upgrade_dialog.style.visibility = "hidden";
 		});
 
+		document.getElementById("cancel_new").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var welcome_screen = document.getElementById("welcome_screen");
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
+		});
+
 		document.getElementById("new_button").addEventListener("click", function() {
 			document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body> New Project </body> </div> <h3> </h3> <h4> </h4><body>Need help? Watch this <a href=""> five minute video </a> ' + config.tutorial_link +  ' on how to get started</body> ' ;
 
 			document.getElementById("welcome_screen").style.visibility = "visible";
+			document.getElementById("welcome_screen").style.height = "430px";
+
 			var blur = document.getElementById("bg_blur");
 			blur.style.visibility = "visible";
 

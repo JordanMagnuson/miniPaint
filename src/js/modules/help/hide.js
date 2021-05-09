@@ -60,6 +60,9 @@ class Help_hide_class {
 			this.GUI_tools.render_tools();
 
 
+			var wrapper = document.getElementById("the_wrapper");
+			wrapper.style.height = "calc(100vh - 80px)";
+
 			var projectbar = document.getElementById("projectbar");
 			projectbar.style["padding-top"] = "30px";
 
@@ -86,6 +89,9 @@ class Help_hide_class {
 
 			this.target.style['display'] = 'none';
 			this.wrapper.style['top'] = '0px'
+			var wrapper = document.getElementById("the_wrapper");
+			wrapper.style.height = "calc(100vh - 50px)";
+
 
 			var projectbar = document.getElementById("projectbar");
 			projectbar.style["padding-top"] = "0px";

@@ -318,7 +318,7 @@ h4 {
 	grid-template-rows: auto 1fr;
 	-ms-grid-columns: auto 1fr auto;
 	grid-template-columns: auto 1fr auto;
-	height: calc(100vh - 100px);
+	height: calc(100vh - 50px);
 
 	grid-template-areas:
 		"submenu submenu submenu"
