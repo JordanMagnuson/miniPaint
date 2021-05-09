@@ -40,10 +40,13 @@ class GUI_menu_class {
 
 	render_main() {
 
-		document.getElementById("welcome_screen").style.visibility = "visible";
 
 		document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body>Welcome to ' + config.app_name +  ' </body> </div> <h3>Welcome to ' + config.app_name +  '!</h3> <h4>The fast, easy and free tool for making digital scrapbooking layouts</h4><body>Need help? Watch this <a href=""> five minute video </a> ' + config.tutorial_link +  ' on how to get started</body> ' ;
 		document.getElementById("projectbar_appName").innerHTML = config.app_name;
+
+		document.getElementById("welcome_screen").style.visibility = "visible";
+		document.getElementById("projectbar").style.visibility = "visible";
+		document.getElementById("the_wrapper").style.visibility = "visible";
 
 		var _this = this;
 

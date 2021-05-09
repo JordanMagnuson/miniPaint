@@ -179,6 +179,7 @@ h4 {
 	padding: 0;
 	/*margin-bottom: 10px;*/
 	background-color: #222222;
+	visibility: hidden;
 }
 
 .top_buttons{
@@ -302,6 +303,7 @@ h4 {
 }
 
 .wrapper{
+	visibility: hidden;
 	display: -ms-grid;
 	display: grid;
 	margin: 0;
