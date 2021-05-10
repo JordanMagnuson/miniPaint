@@ -183,8 +183,8 @@ h4 {
 }
 
 .top_buttons{
-	margin: 3px;
-	width: 8%;
+	margin: 5px;
+	width: 100px;
 }
 #searchbar{
 	width: inherit;
@@ -192,13 +192,14 @@ h4 {
 	padding-bottom: 10px
 }
 #search_input{
-	width: 40%;
+	width: calc(50% - 140px);
 }
 #search_button{
-	width: 10%;
+	width: 100px;
+	padding-right: 5px;
 }
 #projectbar_appName{
-	width: 22%;
+	width: calc(50% - 330px);
 }
 #bg_blur{
 	margin:0;
@@ -240,19 +241,7 @@ h4 {
 	h3 {
 		padding-top: 20px;
 	}
-	.top_buttons{
-		margin: 3px;
-		width: 8%;
-	}
-	#search_input{
-		width: 40%;
-	}
-	#search_button{
-		width: 10%;
-	}
-	#projectbar_appName{
-		display: none;
-	}
+
 
 }
 
