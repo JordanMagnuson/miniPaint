@@ -147,6 +147,8 @@ margin-bottom: 10px;
 
 #logindialogue button {
 	background-color: #373d3f;
+	font-size: 90%;
+	padding: 3px 10px;
 }
 
 #logindialogue button:hover {

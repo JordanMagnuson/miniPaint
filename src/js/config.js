@@ -277,9 +277,6 @@ config.TOOLS = [
 		name: 'media',
 		title: 'Search Images',
 		on_activate: 'on_activate',
-		attributes: {
-			size: 30,
-		}
 	}
 	// {
 	// 	name: 'gradient',
@@ -555,9 +552,6 @@ config.TOOLS_BASE = [
 		name: 'media',
 		title: 'Search Images',
 		on_activate: 'on_activate',
-		attributes: {
-			size: 30,
-		}
 	},
 	// {
 	// 	name: 'gradient',
@@ -866,9 +860,6 @@ config.TOOLS_ADVANCED = [
 		name: 'media',
 		title: 'Search Images',
 		on_activate: 'on_activate',
-		attributes: {
-			size: 30,
-		}
 	}
 ];
 
