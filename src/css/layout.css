@@ -124,31 +124,38 @@ margin-bottom: 10px;
 #logindialogue {
 	display: none;
 	text-align: center;
-	font-size: 130%;
+	font-size: 120%;
     color: #d2d2d2;
     background-color: #666d6f;
 	position: absolute;
     top: 50%;
     left: 50%;
-    /*height: 300px;*/
-    /*width: 300px;*/
     border: 5px;
-    outline-style: solid;
-	outline-width: thin;
 	z-index: 130;
-	padding: 40px;
-	/*padding-top: 34px;*/
 	transform: translate(-50%, -50%);
 }
 
-#logindialogue > p {
+#loginheader {
+	background-color: #373d3f;
+	padding: 5px 0px;
+	border: 1px solid #0f0f0f;
+}
+
+#loginformdiv {
+	padding: 20px 40px;
+	border: 1px solid #0f0f0f;
+	border-top: none;
+}
+
+#loginformdiv > p {
 	text-align: left;
 }
 
 #logindialogue button {
 	background-color: #373d3f;
 	font-size: 90%;
-	padding: 3px 10px;
+	padding: 3px 10px #0f0f0f;
+	border-color: #0f0f0f;
 }
 
 #logindialogue button:hover {
