@@ -40,10 +40,13 @@ class GUI_menu_class {
 
 	render_main() {
 
-		document.getElementById("welcome_screen").style.visibility = "visible";
 
 		document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body>Welcome to ' + config.app_name +  ' </body> </div> <h3>Welcome to ' + config.app_name +  '!</h3> <h4>The fast, easy and free tool for making digital scrapbooking layouts</h4><body>Need help? Watch this <a href=""> five minute video </a> ' + config.tutorial_link +  ' on how to get started</body> ' ;
 		document.getElementById("projectbar_appName").innerHTML = config.app_name;
+
+		document.getElementById("welcome_screen").style.visibility = "visible";
+		document.getElementById("projectbar").style.visibility = "visible";
+		document.getElementById("the_wrapper").style.visibility = "visible";
 
 		var _this = this;
 
@@ -51,6 +54,13 @@ class GUI_menu_class {
 			var blur = document.getElementById("bg_blur");
 			var welcome_screen = document.getElementById("welcome_screen");
 			_this.FNC.new();
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
+		});
+		document.getElementById("ws_open").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var welcome_screen = document.getElementById("welcome_screen");
+			_this.FOC.open_file();
 			blur.style.visibility = "hidden";
 			welcome_screen.style.visibility = "hidden";
 		});
@@ -88,10 +98,19 @@ class GUI_menu_class {
 			upgrade_dialog.style.visibility = "hidden";
 		});
 
+		document.getElementById("cancel_new").addEventListener("click", function() {
+			var blur = document.getElementById("bg_blur");
+			var welcome_screen = document.getElementById("welcome_screen");
+			blur.style.visibility = "hidden";
+			welcome_screen.style.visibility = "hidden";
+		});
+
 		document.getElementById("new_button").addEventListener("click", function() {
 			document.getElementById("ws_body").innerHTML = ' <div class="ws_top"> <body> New Project </body> </div> <h3> </h3> <h4> </h4><body>Need help? Watch this <a href=""> five minute video </a> ' + config.tutorial_link +  ' on how to get started</body> ' ;
 
 			document.getElementById("welcome_screen").style.visibility = "visible";
+		//	document.getElementById("welcome_screen").style.height = "430px";
+
 			var blur = document.getElementById("bg_blur");
 			blur.style.visibility = "visible";
 

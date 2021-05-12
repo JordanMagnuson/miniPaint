@@ -181,11 +181,12 @@ h4 {
 	padding: 0;
 	/*margin-bottom: 10px;*/
 	background-color: #222222;
+	visibility: hidden;
 }
 
 .top_buttons{
-	margin: 3px;
-	width: 8%;
+	margin: 5px;
+	width: 100px;
 }
 #searchbar{
 	width: inherit;
@@ -193,13 +194,14 @@ h4 {
 	padding-bottom: 10px
 }
 #search_input{
-	width: 40%;
+	width: calc(50% - 140px);
 }
 #search_button{
-	width: 10%;
+	width: 100px;
+	padding-right: 5px;
 }
 #projectbar_appName{
-	width: 22%;
+	width: calc(50% - 330px);
 }
 #bg_blur{
 	margin:0;
@@ -230,6 +232,10 @@ h4 {
 	#media {
 		display: block;
 	}
+	#projectbar_appName{
+		width: calc(70% - 330px);
+	}
+
 }
 
 @media screen and (max-width:700px){
@@ -241,19 +247,10 @@ h4 {
 	h3 {
 		padding-top: 20px;
 	}
-	.top_buttons{
-		margin: 3px;
-		width: 8%;
-	}
-	#search_input{
-		width: 40%;
-	}
-	#search_button{
-		width: 10%;
-	}
 	#projectbar_appName{
-		display: none;
+		width: calc(90% - 330px);
 	}
+
 
 }
 
@@ -304,6 +301,7 @@ h4 {
 }
 
 .wrapper{
+	visibility: hidden;
 	display: -ms-grid;
 	display: grid;
 	margin: 0;
@@ -320,7 +318,7 @@ h4 {
 	grid-template-rows: auto 1fr;
 	-ms-grid-columns: auto 1fr auto;
 	grid-template-columns: auto 1fr auto;
-	height: calc(100vh - 100px);
+	height: calc(100vh - 50px);
 
 	grid-template-areas:
 		"submenu submenu submenu"
