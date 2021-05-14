@@ -160,7 +160,7 @@ config.TOOLS = [
 		on_update: 'on_params_update',
 		attributes: {
 			no_show:true,
-			size:12
+			size:30
 		}
 	},
 	{
@@ -178,7 +178,7 @@ config.TOOLS = [
 		title: 'Border',
 		on_activate: 'on_activate',
 		attributes: {
-			size: 12,
+			size: 5,
 			no_show: true,
 		},
 	},
@@ -435,7 +435,7 @@ config.TOOLS_BASE = [
 		on_update: 'on_params_update',
 		attributes: {
 			no_show:true,
-			size:12
+			size:30
 		}
 	},
 	{
@@ -453,7 +453,7 @@ config.TOOLS_BASE = [
 		title: 'Border',
 		on_activate: 'on_activate',
 		attributes: {
-			size: 12,
+			size: 5,
 			no_show: true,
 		},
 	},
@@ -708,7 +708,7 @@ config.TOOLS_ADVANCED = [
 		title: 'Erase',
 		on_update: 'on_params_update',
 		attributes: {
-			size:12
+			size:30
 		}
 	},
 	{
@@ -726,7 +726,7 @@ config.TOOLS_ADVANCED = [
 		title: 'Border',
 		on_activate: 'on_activate',
 		attributes: {
-			size: 12,
+			size: 5,
 		},
 	},
   // {

@@ -80,7 +80,7 @@ class Borders_class extends Base_tools_class {
 
 	on_activate() {
 		var params = this.getParams();
-		this.add_borders({size:5, shadow:false, color:config.COLOR});
+		this.add_borders({size:5, shadow:false, color:'#ffffff'});
 	}
 
 }
