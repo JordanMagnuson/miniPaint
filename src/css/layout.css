@@ -21,8 +21,8 @@
 	position: absolute;
 	text-align: center;
 	font-size: 110%;
-    color: black;
-    background-color: white;
+    color: #f4f3f3;
+    background-color: #464d4f;
     top: 50%;
     left: 50%;
     height: 520px;
@@ -69,6 +69,7 @@ margin-bottom: 10px;
     padding-top: 10px;
     padding-bottom: 10px;
 	background-color: #373d3f;
+	color: #f4f3f3;
 }
 
 .ws_body{
@@ -82,7 +83,7 @@ margin-bottom: 10px;
 	padding: 15px;
 	padding-left: 20px;
 	padding-right: 20px;
-	background-color: #ccc;
+	background-color: #2f3739;
 	width: 180px;
 	margin: 15px;
 }
@@ -91,7 +92,7 @@ margin-bottom: 10px;
 	padding: 5px;
 	padding-left: 20px;
 	padding-right: 20px;
-	background-color: #ccc;
+	background-color: #2f3739;
 	width: 120px;
 	margin: 15px;
 }
