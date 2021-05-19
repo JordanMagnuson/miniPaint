@@ -40,11 +40,11 @@ Gingham, Inkwell, Lo-fi, Toaster, Valencia, X-Pro II.
 
 
 
-## Build instructions
-See [Wiki > Build instructions](https://github.com/viliusle/miniPaint/wiki/Build-instructions)
+## Build Intructions
+- Clone Repository
+- NPM Install
+- NPM Run Server
 
-## Wiki
-See [Wiki](https://github.com/viliusle/miniPaint/wiki)
 
 ## License
 MIT License.
