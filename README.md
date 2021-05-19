@@ -1,15 +1,15 @@
-# miniPaint
+# Scrapbook Maker
 
 Online image editor lets you create, edit images using HTML5 technologies.
 No need to buy, download, install or have obsolete flash. No ads.
 Key features: layers, filters, HTML5, open source, Photoshop alternative.
 
-miniPaint operates directly in the browser. You can create images, paste from the clipboard (ctrl+v) 
+Scrapbook Maker operates directly in the browser. You can create images, paste from the clipboard (ctrl+v) 
 or upload from the computer (using menu or drag & drop). Nothing will be sent to any server. Everything stays in your 
 browser. 
 
 ## URL:
-**https://viliusle.github.io/miniPaint/**
+**https://www.digitalscrapbook.com/maker/**
 
 ## Preview:
 ![miniPaint](https://raw.githubusercontent.com/viliusle/miniPaint/master/images/preview.gif)
@@ -40,10 +40,7 @@ Gingham, Inkwell, Lo-fi, Toaster, Valencia, X-Pro II.
  borders, sprites, key-points, color zoom, replace color, restore alpha, content fill.
 - **Help**: keyboard shortcuts, translations.
 
-## Embed
-To embed this app in the other page, use this HTML code:
 
-    <iframe style="width:100%; height:1000px;" id="miniPaint" src="https://viliusle.github.io/miniPaint/"></iframe>
 
 ## Build instructions
 See [Wiki > Build instructions](https://github.com/viliusle/miniPaint/wiki/Build-instructions)
