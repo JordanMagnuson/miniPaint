@@ -15,8 +15,6 @@ browser.
 ![miniPaint](https://raw.githubusercontent.com/viliusle/miniPaint/master/images/preview.gif)
 (generated using miniPaint)
 
-**Change log:** [/miniPaint/releases](https://github.com/viliusle/miniPaint/releases)
-
 ## Browser Support
 - Chrome
 - Firefox
